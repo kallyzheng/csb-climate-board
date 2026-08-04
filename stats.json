@@ -1,0 +1,331 @@
+{
+ "tiles": {
+  "fund_all": 23533.8,
+  "fund_m6": 12564.0,
+  "fund_ytd": 14350.8,
+  "companies_with_deals": 1081,
+  "companies_tracked": 1801,
+  "active_listings": 1717,
+  "boards_with_active": 145,
+  "mba_roles": 382,
+  "n_mba_functions": 26,
+  "n_excluded_functions": 8,
+  "n_tech_categories": 99,
+  "n_sectors": 6,
+  "categorized": 1796,
+  "pct_categorized": 99.7,
+  "pct_high_conf": 88.9,
+  "high_conf": 1526,
+  "classified": 1717,
+  "unclassified": 0,
+  "pct_classified": 100.0,
+  "open_app_posts": 58,
+  "email_cta_companies": 58,
+  "open_app_companies": 26,
+  "careers_located": 645,
+  "supported_ats": 218,
+  "named_unsupported_ats": 25,
+  "top_unsupported_ats": [
+   "Paylocity",
+   "Paycom",
+   "iSolved"
+  ],
+  "custom_pages": 402,
+  "reachable_extra": 84
+ },
+ "generated_at": "2026-08-04T22:54:21+00:00",
+ "funding_through": "2026-07-28",
+ "sectors": [
+  "Electricity",
+  "Transportation",
+  "Manufacturing",
+  "Food/Ag & Nature",
+  "Buildings",
+  "GHG Removal"
+ ],
+ "months": [
+  "2025-04",
+  "2025-05",
+  "2025-06",
+  "2025-07",
+  "2025-08",
+  "2025-09",
+  "2025-10",
+  "2025-11",
+  "2025-12",
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04",
+  "2026-05",
+  "2026-06",
+  "2026-07"
+ ],
+ "monthly": {
+  "2025-04": {
+   "Electricity": 453.5,
+   "Transportation": 235.4,
+   "Manufacturing": 46.1,
+   "Food/Ag & Nature": 181.1,
+   "Buildings": 326.9,
+   "GHG Removal": 110.8
+  },
+  "2025-05": {
+   "Electricity": 83.5,
+   "Transportation": 243.5,
+   "Manufacturing": 77.4,
+   "Food/Ag & Nature": 87.0,
+   "Buildings": 13.1,
+   "GHG Removal": 4.7
+  },
+  "2025-06": {
+   "Electricity": 17.6,
+   "Transportation": 84.4,
+   "Manufacturing": 208.5,
+   "Food/Ag & Nature": 260.0,
+   "Buildings": 64.7,
+   "GHG Removal": 82.9
+  },
+  "2025-07": {
+   "Electricity": 169.7,
+   "Transportation": 137.5,
+   "Manufacturing": 222.0,
+   "Food/Ag & Nature": 174.8,
+   "Buildings": 32.6,
+   "GHG Removal": 3.0
+  },
+  "2025-08": {
+   "Electricity": 487.1,
+   "Transportation": 509.0,
+   "Manufacturing": 39.5,
+   "Food/Ag & Nature": 52.7,
+   "Buildings": 75.6,
+   "GHG Removal": 18.8
+  },
+  "2025-09": {
+   "Electricity": 85.8,
+   "Transportation": 228.9,
+   "Manufacturing": 57.8,
+   "Food/Ag & Nature": 1091.9,
+   "Buildings": 169.7,
+   "GHG Removal": 38.8
+  },
+  "2025-10": {
+   "Electricity": 225.7,
+   "Transportation": 110.5,
+   "Manufacturing": 78.2,
+   "Food/Ag & Nature": 211.6,
+   "Buildings": 74.7,
+   "GHG Removal": 5.8
+  },
+  "2025-11": {
+   "Electricity": 205.1,
+   "Transportation": 109.8,
+   "Manufacturing": 139.2,
+   "Food/Ag & Nature": 165.2,
+   "Buildings": 26.2,
+   "GHG Removal": 0.1
+  },
+  "2025-12": {
+   "Electricity": 1037.0,
+   "Transportation": 235.7,
+   "Manufacturing": 69.9,
+   "Food/Ag & Nature": 136.5,
+   "Buildings": 165.9,
+   "GHG Removal": 9.6
+  },
+  "2026-01": {
+   "Electricity": 482.4,
+   "Transportation": 162.8,
+   "Manufacturing": 876.8,
+   "Food/Ag & Nature": 83.5,
+   "Buildings": 156.0,
+   "GHG Removal": 25.3
+  },
+  "2026-02": {
+   "Electricity": 1002.8,
+   "Transportation": 231.1,
+   "Manufacturing": 187.5,
+   "Food/Ag & Nature": 7.3,
+   "Buildings": 20.6,
+   "GHG Removal": 12.0
+  },
+  "2026-03": {
+   "Electricity": 218.0,
+   "Transportation": 813.9,
+   "Manufacturing": 105.1,
+   "Food/Ag & Nature": 15.6,
+   "Buildings": 107.6,
+   "GHG Removal": 61.4
+  },
+  "2026-04": {
+   "Electricity": 632.5,
+   "Transportation": 807.2,
+   "Manufacturing": 622.6,
+   "Food/Ag & Nature": 96.4,
+   "Buildings": 90.6,
+   "GHG Removal": 25.3
+  },
+  "2026-05": {
+   "Electricity": 1641.6,
+   "Transportation": 487.8,
+   "Manufacturing": 260.7,
+   "Food/Ag & Nature": 445.1,
+   "Buildings": 23.7,
+   "GHG Removal": 44.6
+  },
+  "2026-06": {
+   "Electricity": 1175.7,
+   "Transportation": 240.3,
+   "Manufacturing": 735.8,
+   "Food/Ag & Nature": 61.5,
+   "Buildings": 110.9,
+   "GHG Removal": 3.2
+  },
+  "2026-07": {
+   "Electricity": 1652.5,
+   "Transportation": 340.4,
+   "Manufacturing": 144.3,
+   "Food/Ag & Nature": 45.8,
+   "Buildings": 37.9,
+   "GHG Removal": 54.7
+  }
+ },
+ "ranges": {
+  "all": [
+   "2025-04",
+   "2025-05",
+   "2025-06",
+   "2025-07",
+   "2025-08",
+   "2025-09",
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07"
+  ],
+  "m6": [
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07"
+  ],
+  "ytd": [
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07"
+  ]
+ },
+ "range_labels": {
+  "all": "All 16 months (Apr 2025 \u2013 Jul 2026)",
+  "m6": "Last 6 months (Feb 2026 \u2013 Jul 2026)",
+  "ytd": "YTD 2026 (Jan 2026 \u2013 Jul 2026)"
+ },
+ "sector_totals": {
+  "Electricity": {
+   "all": 9570.5,
+   "m6": 6323.1,
+   "ytd": 6805.5,
+   "n": 420
+  },
+  "Transportation": {
+   "all": 4978.2,
+   "m6": 2920.7,
+   "ytd": 3083.5,
+   "n": 322
+  },
+  "Manufacturing": {
+   "all": 3871.4,
+   "m6": 2056.0,
+   "ytd": 2932.8,
+   "n": 427
+  },
+  "Food/Ag & Nature": {
+   "all": 3116.0,
+   "m6": 671.7,
+   "ytd": 755.2,
+   "n": 325
+  },
+  "Buildings": {
+   "all": 1496.7,
+   "m6": 391.3,
+   "ytd": 547.3,
+   "n": 195
+  },
+  "GHG Removal": {
+   "all": 501.0,
+   "m6": 201.2,
+   "ytd": 226.5,
+   "n": 107
+  }
+ },
+ "jobs": {
+  "Electricity": {
+   "mba": 152,
+   "non": 584
+  },
+  "Transportation": {
+   "mba": 42,
+   "non": 169
+  },
+  "Manufacturing": {
+   "mba": 60,
+   "non": 155
+  },
+  "Food/Ag & Nature": {
+   "mba": 42,
+   "non": 194
+  },
+  "Buildings": {
+   "mba": 70,
+   "non": 200
+  },
+  "GHG Removal": {
+   "mba": 16,
+   "non": 33
+  }
+ },
+ "funnel": [
+  [
+   "Companies tracked (PitchBook)",
+   1801
+  ],
+  [
+   "Climate-categorized",
+   1796
+  ],
+  [
+   "Careers page located",
+   645
+  ],
+  [
+   "On a supported ATS",
+   218
+  ],
+  [
+   "Active listings harvested",
+   1717
+  ],
+  [
+   "MBA-relevant roles",
+   382
+  ]
+ ],
+ "_diagnostics": {
+  "companies_scanned": 1801,
+  "jobs_scanned": 2033,
+  "active_jobs_without_sector": 0
+ }
+}

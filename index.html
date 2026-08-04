@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSB Climate Job Board — Pipeline Metrics</title>
+</head>
+<body style="margin:0">
+
+<style>
+  .viz-root{
+    color-scheme: light;
+    --surface-1:#fcfcfb; --surface-2:#f4f4f1; --border:#e2e1dc;
+    --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#77756f;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300;
+    --neutral:#a8a69e; --accent:#2a78d6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])) .viz-root{
+      color-scheme: dark;
+      --surface-1:#1a1a19; --surface-2:#232322; --border:#3a3a37;
+      --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8d84;
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300;
+      --neutral:#6b6961; --accent:#3987e5;
+    }
+  }
+  :root[data-theme="dark"] .viz-root{
+    color-scheme: dark;
+    --surface-1:#1a1a19; --surface-2:#232322; --border:#3a3a37;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8d84;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300;
+    --neutral:#6b6961; --accent:#3987e5;
+  }
+
+  .viz-root{
+    font-family: ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--surface-1); color:var(--text-primary);
+    padding:28px 22px 56px; max-width:1120px; margin:0 auto; line-height:1.45;
+  }
+  h1{font-size:1.5rem;margin:0 0 4px;letter-spacing:-.015em}
+  .sub{color:var(--text-secondary);font-size:.85rem;margin:0 0 6px}
+  .asof{color:var(--text-muted);font-size:.75rem;margin:0 0 30px}
+  h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;
+     color:var(--text-secondary);margin:40px 0 4px;font-weight:600}
+  .h2note{color:var(--text-muted);font-size:.75rem;margin:0 0 16px}
+  section:first-of-type h2{margin-top:8px}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+  .tile{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:13px 15px}
+  .tile .v{font-size:1.55rem;font-weight:640;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tile .l{font-size:.73rem;color:var(--text-secondary);margin-top:3px}
+  .tile .d{font-size:.68rem;color:var(--text-muted);margin-top:2px}
+
+  .ctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
+  .ctl button{font:inherit;font-size:.75rem;padding:5px 11px;border-radius:999px;
+    border:1px solid var(--border);background:var(--surface-1);color:var(--text-secondary);cursor:pointer}
+  .ctl button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .ctl .lbl{font-size:.72rem;color:var(--text-muted);margin-right:2px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:11px;margin:12px 0 0;font-size:.75rem;color:var(--text-secondary)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .sw{width:10px;height:10px;border-radius:2px;flex:none}
+
+  .chart{width:100%;overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto}
+  .grid line{stroke:var(--border);stroke-width:1}
+  .axis text{fill:var(--text-muted);font-size:10px}
+  .vlabel{fill:var(--text-secondary);font-size:10px;font-variant-numeric:tabular-nums}
+  .rowlabel{fill:var(--text-primary);font-size:11.5px}
+
+  table{border-collapse:collapse;width:100%;font-size:.79rem;margin-top:6px}
+  th,td{text-align:right;padding:6px 9px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left;font-variant-numeric:normal}
+  th{color:var(--text-secondary);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+  tfoot td{font-weight:650;border-bottom:none}
+  details{margin-top:14px}
+  summary{cursor:pointer;font-size:.75rem;color:var(--text-secondary)}
+
+  .note{background:var(--surface-2);border-left:3px solid var(--neutral);border-radius:0 7px 7px 0;
+        padding:11px 14px;font-size:.79rem;color:var(--text-secondary);margin:18px 0 0}
+  .note b{color:var(--text-primary)}
+  a{color:var(--accent)}
+  .embed{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface-2)}
+  .embed iframe{display:block;width:100%;height:620px;border:0}
+  @media(max-width:640px){ .embed iframe{height:460px} }
+  .boardcard{display:flex;align-items:center;gap:16px;text-decoration:none;
+    border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;
+    background:var(--surface-2);padding:18px 20px;transition:border-color .15s,transform .15s}
+  .boardcard:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .boardcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .bc-main{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .bc-t{font-size:1.02rem;font-weight:640;color:var(--text-primary)}
+  .bc-s{font-size:.79rem;color:var(--text-secondary)}
+  .bc-arrow{margin-left:auto;font-size:1.25rem;color:var(--accent);flex:none}
+  @media(prefers-reduced-motion:reduce){ .boardcard{transition:none} .boardcard:hover{transform:none} }
+  .funnel{display:grid;gap:7px;margin-top:4px}
+  .fr{display:grid;grid-template-columns:190px 1fr 92px;gap:11px;align-items:center;font-size:.8rem}
+  .fbar{height:24px;border-radius:4px;background:var(--accent);min-width:2px}
+  .fr .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--text-secondary);font-size:.76rem}
+  @media(max-width:640px){ .fr{grid-template-columns:130px 1fr 76px} }
+</style>
+
+<div class="viz-root">
+  <h1>CSB Climate Job Board</h1>
+  <p class="sub">Automated pipeline: PitchBook company universe → climate-tech classification → careers-page discovery → job harvesting → MBA relevance classification.</p>
+  <p class="asof">Funding data reflects the PitchBook pull of 27 Apr 2026 (deals Apr 2025–Apr 2026). Job data live as of 29 Jul 2026.</p>
+
+  <!-- ───────── 0. LIVE BOARD ───────── -->
+  <section>
+    <h2>The live board</h2>
+    <p class="h2note">Filterable job database — climate sector, MBA function, seniority, location.</p>
+    <div class="embed">
+      <iframe src="https://roasted-gondola-2df.notion.site/ebd/d66b7d759b7c46f2866df434a810b67d?v=3486c669575c819dab4a000cbffa6e49"
+              title="CSB climate job board — live Notion database" allowfullscreen></iframe>
+    </div>
+    <p class="h2note" style="margin-top:8px">
+      <a href="https://roasted-gondola-2df.notion.site/d66b7d759b7c46f2866df434a810b67d?v=3486c669575c819dab4a000cbffa6e49"
+         target="_blank" rel="noopener">Open full board in Notion &#8599;</a>
+    </p>
+  </section>
+
+  <!-- ───────── 1. FUNDING ───────── -->
+  <section>
+    <h2>1 · Capital flowing into climate tech</h2>
+    <p class="h2note">Disclosed deal value for tracked companies, by climate sector.</p>
+
+    <div class="tiles">
+      <div class="tile"><div class="v" id="tFundAll">&mdash;</div><div class="l">Total tracked funding</div><div class="d" id="tFundAllD"></div></div>
+      <div class="tile"><div class="v" id="tFundM6">&mdash;</div><div class="l">Last 6 months</div><div class="d" id="tFundM6D"></div></div>
+      <div class="tile"><div class="v" id="tFundYtd">&mdash;</div><div class="l">Year to date</div><div class="d" id="tFundYtdD"></div></div>
+      <div class="tile"><div class="v" id="tCoDeals">&mdash;</div><div class="l">Companies with disclosed deals</div><div class="d" id="tCoDealsD"></div></div>
+    </div>
+
+    <div class="ctl" role="group" aria-label="Funding time range">
+      <span class="lbl">Range</span>
+      <button data-range="all" aria-pressed="true" id="btnAll">All months</button>
+      <button data-range="m6" aria-pressed="false">Last 6 months</button>
+      <button data-range="ytd" aria-pressed="false" id="btnYtd">YTD</button>
+    </div>
+
+    <div class="chart"><svg id="fundChart" viewBox="0 0 940 300" role="img"
+      aria-label="Monthly disclosed funding by climate sector, stacked bars"></svg></div>
+    <div class="legend" id="fundLegend"></div>
+
+    <h2 style="margin-top:30px">Funding by sector</h2>
+    <p class="h2note" id="sectorNote">All 13 months</p>
+    <div class="chart"><svg id="sectorChart" viewBox="0 0 940 220" role="img"
+      aria-label="Total disclosed funding by climate sector"></svg></div>
+
+    <details>
+      <summary>Table view — funding by sector</summary>
+      <table><thead><tr><th>Sector</th><th>All 13 mo ($M)</th><th>Last 6 mo ($M)</th><th>YTD 2026 ($M)</th><th>Deals</th></tr></thead>
+        <tbody id="fundTable"></tbody></table>
+    </details>
+  </section>
+
+  <!-- ───────── 2. JOBS ───────── -->
+  <section>
+    <h2>2 · Jobs harvested, by sector and MBA relevance</h2>
+    <p class="h2note">Every active listing is classified into an MBA function taxonomy; roles requiring engineering, science, trade or clinical backgrounds are filtered off the student board.</p>
+
+    <div class="tiles">
+      <div class="tile"><div class="v" id="tActive">&mdash;</div><div class="l">Active job listings</div><div class="d" id="tActiveD"></div></div>
+      <div class="tile"><div class="v" id="tMba">&mdash;</div><div class="l">MBA-relevant roles</div><div class="d">the student-facing board</div></div>
+      <div class="tile"><div class="v" id="tFns">&mdash;</div><div class="l">MBA job functions</div><div class="d" id="tFnsD"></div></div>
+      <div class="tile"><div class="v" id="tCats">&mdash;</div><div class="l">Climate tech categories</div><div class="d" id="tCatsD"></div></div>
+    </div>
+
+    <div class="chart"><svg id="jobChart" viewBox="0 0 940 250" role="img"
+      aria-label="Active jobs by climate sector, split into MBA-relevant and not MBA-relevant"></svg></div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--s1)"></i> MBA-relevant</span>
+      <span><i class="sw" style="background:var(--neutral)"></i> Not MBA-relevant (engineering, science, trades)</span>
+    </div>
+
+    <details>
+      <summary>Table view — jobs by sector</summary>
+      <table><thead><tr><th>Sector</th><th>MBA-relevant</th><th>Not MBA</th><th>Total</th><th>% MBA</th></tr></thead>
+        <tbody id="jobTable"></tbody></table>
+    </details>
+  </section>
+
+  <!-- ───────── 3. PIPELINE ───────── -->
+  <section>
+    <h2>3 · Pipeline coverage &amp; data quality</h2>
+    <p class="h2note">How far the automated pipeline carries a company from raw PitchBook record to a filterable job listing.</p>
+
+    <div class="funnel" id="funnel"></div>
+
+    <div class="tiles" style="margin-top:24px">
+      <div class="tile"><div class="v" id="tPctCat">&mdash;</div><div class="l">Companies auto-categorized</div><div class="d" id="tPctCatD"></div></div>
+      <div class="tile"><div class="v" id="tPctConf">&mdash;</div><div class="l">High-confidence classifications</div><div class="d" id="tPctConfD"></div></div>
+      <div class="tile"><div class="v" id="tPctClass">&mdash;</div><div class="l">Listings classified</div><div class="d" id="tPctClassD"></div></div>
+      <div class="tile"><div class="v" id="tOpenApp">&mdash;</div><div class="l">Open-application posts</div><div class="d">flagged, not shown as roles</div></div>
+    </div>
+
+    <div class="note">
+      <b>Reach beyond posted roles.</b> <span id="pEmail">&mdash;</span> companies publish only an “email us your résumé” contact and <span id="pOpen">&mdash;</span> accept open applications with no discrete listings — <span id="pReach">&mdash;</span> additional employers reachable through a separate general-application track rather than a job feed.
+      </div>
+    <div class="note">
+      <b>Known coverage gap.</b> <span id="pCareers">&mdash;</span> companies have a careers page; <span id="pAts">&mdash;</span> sit on ATS platforms the harvester supports today. A further <span id="pUnsup">&mdash;</span> are on identified but not-yet-integrated platforms (<span id="pUnsupList">&mdash;</span> and others), and <span id="pCustom">&mdash;</span> use custom pages requiring HTML extraction — the next expansion targets.
+      </div>
+  </section>
+</div>
+
+<script>
+let SECTORS=[], MONTHLY={}, SECTOR_TOTALS={}, JOBS={}, RANGES={}, RANGE_LABEL={}, FUNNEL=[];
+const SC = ["--s1","--s2","--s3","--s4","--s5","--s6"];
+const cv = n => getComputedStyle(document.querySelector(".viz-root")).getPropertyValue(n).trim();
+const NS = "http://www.w3.org/2000/svg";
+const el = (t,a={})=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const money = v => v>=1000 ? "$"+(v/1000).toFixed(1)+"B" : "$"+Math.round(v)+"M";
+const short = s => ({"Food/Ag & Nature":"Food/Ag","GHG Removal":"GHG Rem."})[s]||s;
+
+function buildTiles(S){
+  const T=S.tiles, set=(id,v)=>{const e=document.getElementById(id); if(e) e.textContent=v;};
+  const num=v=>Number(v).toLocaleString();
+  const span=k=>{const r=S.ranges[k]; if(!r||!r.length) return "no data";
+    const f=m=>{const[y,mm]=m.split("-");
+      return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+mm-1]+" "+y;};
+    return r.length===1?f(r[0]):f(r[0])+" – "+f(r[r.length-1]);};
+
+  set("tFundAll",money(T.fund_all));  set("tFundAllD",span("all"));
+  set("tFundM6", money(T.fund_m6));   set("tFundM6D", span("m6"));
+  set("tFundYtd",money(T.fund_ytd));  set("tFundYtdD",span("ytd"));
+  set("tCoDeals",num(T.companies_with_deals));
+  set("tCoDealsD",`of ${num(T.companies_tracked)} tracked`);
+
+  set("tActive",num(T.active_listings));
+  set("tActiveD",`across ${num(T.boards_with_active)} company boards`);
+  set("tMba",num(T.mba_roles));
+  set("tFns",num(T.n_mba_functions));
+  set("tFnsD",`+ ${T.n_excluded_functions} excluded categories`);
+  set("tCats",num(T.n_tech_categories));
+  set("tCatsD",`across ${T.n_sectors} sectors`);
+
+  set("tPctCat",T.pct_categorized+"%");
+  set("tPctCatD",`${num(T.categorized)} of ${num(T.companies_tracked)}`);
+  set("tPctConf",Math.round(T.pct_high_conf)+"%");
+  set("tPctConfD",`${num(T.high_conf)} of ${num(T.classified)} · two-pass check`);
+  set("tPctClass",Math.round(T.pct_classified)+"%");
+  set("tPctClassD",`${num(T.unclassified)} unclassified`);
+  set("tOpenApp",num(T.open_app_posts));
+
+  set("pEmail",num(T.email_cta_companies));
+  set("pOpen",num(T.open_app_companies));
+  set("pReach",num(T.reachable_extra));
+  set("pCareers",num(T.careers_located));
+  set("pAts",num(T.supported_ats));
+  set("pUnsup",num(T.named_unsupported_ats));
+  set("pUnsupList",T.top_unsupported_ats.join(", "));
+  set("pCustom",num(T.custom_pages));
+
+  // range buttons carry counts/years that change with the data
+  set("btnAll",`All ${S.months.length} months`);
+  set("btnYtd",`YTD ${(S.months.filter(m=>m.startsWith(String(new Date().getFullYear())))[0]||"").slice(0,4)||""}`.trim());
+}
+
+function buildLegend(){
+  const lg = document.getElementById("fundLegend"); lg.innerHTML="";
+  SECTORS.forEach((s,i)=>{ const w=document.createElement("span");
+    w.innerHTML = `<i class="sw" style="background:var(${SC[i]})"></i>${s}`; lg.appendChild(w); });
+}
+
+/* ── monthly stacked bars ── */
+function drawFunding(range){
+  const svg=document.getElementById("fundChart"); svg.textContent="";
+  const months=RANGES[range], W=940,H=300, L=54,R=14,T=16,B=42;
+  const iw=W-L-R, ih=H-T-B;
+  const tot=months.map(m=>SECTORS.reduce((a,s)=>a+(MONTHLY[m][s]||0),0));
+  const max=Math.max(...tot)*1.08;
+  const g=el("g"); svg.appendChild(g);
+  const gg=el("g",{class:"grid"});
+  for(let i=0;i<=4;i++){const y=T+ih-(ih*i/4);
+    gg.appendChild(el("line",{x1:L,x2:W-R,y1:y,y2:y}));
+    const tx=el("text",{x:L-8,y:y+3,"text-anchor":"end",class:"vlabel"});
+    tx.textContent=money(max*i/4); gg.appendChild(tx);}
+  g.appendChild(gg);
+  const bw=Math.min(46, iw/months.length*0.66), step=iw/months.length;
+  months.forEach((m,mi)=>{
+    const x=L+step*mi+(step-bw)/2; let acc=0;
+    SECTORS.forEach((s,si)=>{
+      const v=MONTHLY[m][s]||0; if(!v) return;
+      const h=(v/max)*ih; const y=T+ih-((acc+v)/max)*ih; acc+=v;
+      const r=el("rect",{x,y,width:bw,height:Math.max(h-2,1),rx:2,fill:cv(SC[si])});
+      r.appendChild(el("title")).textContent=`${m} · ${s}: $${v}M`;
+      g.appendChild(r);
+    });
+    const t=el("text",{x:x+bw/2,y:H-22,"text-anchor":"middle",class:"vlabel"});
+    t.textContent=m.slice(2).replace("-","/"); g.appendChild(t);
+    const tt=el("text",{x:x+bw/2,y:T+ih-(acc/max)*ih-6,"text-anchor":"middle",class:"vlabel"});
+    tt.textContent=Math.round(acc); g.appendChild(tt);
+  });
+  const ax=el("text",{x:L,y:H-6,class:"vlabel"}); ax.textContent="Disclosed deal value, $M per month"; g.appendChild(ax);
+}
+
+/* ── sector totals: horizontal bars w/ direct labels ── */
+function drawSectors(range){
+  const svg=document.getElementById("sectorChart"); svg.textContent="";
+  document.getElementById("sectorNote").textContent=RANGE_LABEL[range];
+  const key=range, W=940,L=132,R=96,T=8, rowH=32;
+  const rows=[...SECTORS].sort((a,b)=>SECTOR_TOTALS[b][key]-SECTOR_TOTALS[a][key]);
+  const max=Math.max(...rows.map(s=>SECTOR_TOTALS[s][key]));
+  svg.setAttribute("viewBox",`0 0 ${W} ${T+rows.length*rowH+10}`);
+  rows.forEach((s,i)=>{
+    const y=T+i*rowH, v=SECTOR_TOTALS[s][key], w=Math.max((v/max)*(W-L-R),2);
+    const lab=el("text",{x:L-10,y:y+18,"text-anchor":"end",class:"rowlabel"}); lab.textContent=s; svg.appendChild(lab);
+    const bar=el("rect",{x:L,y:y+5,width:w,height:20,rx:4,fill:cv(SC[SECTORS.indexOf(s)])});
+    bar.appendChild(el("title")).textContent=`${s}: $${v}M`; svg.appendChild(bar);
+    const val=el("text",{x:L+w+9,y:y+19,class:"vlabel"}); val.textContent=money(v); svg.appendChild(val);
+  });
+}
+
+/* ── jobs: MBA vs not, stacked ── */
+function drawJobs(){
+  const svg=document.getElementById("jobChart"); svg.textContent="";
+  const W=940,L=132,R=118,T=8,rowH=34;
+  const rows=[...SECTORS].sort((a,b)=>(JOBS[b].mba+JOBS[b].non)-(JOBS[a].mba+JOBS[a].non));
+  const max=Math.max(...rows.map(s=>JOBS[s].mba+JOBS[s].non));
+  svg.setAttribute("viewBox",`0 0 ${W} ${T+rows.length*rowH+10}`);
+  rows.forEach((s,i)=>{
+    const y=T+i*rowH, d=JOBS[s], tot=d.mba+d.non, iw=W-L-R;
+    const lab=el("text",{x:L-10,y:y+20,"text-anchor":"end",class:"rowlabel"}); lab.textContent=s; svg.appendChild(lab);
+    const wm=(d.mba/max)*iw, wn=(d.non/max)*iw;
+    const b1=el("rect",{x:L,y:y+6,width:Math.max(wm,2),height:21,rx:4,fill:cv("--s1")});
+    b1.appendChild(el("title")).textContent=`${s} · MBA-relevant: ${d.mba}`; svg.appendChild(b1);
+    const b2=el("rect",{x:L+wm+2,y:y+6,width:Math.max(wn,2),height:21,rx:4,fill:cv("--neutral")});
+    b2.appendChild(el("title")).textContent=`${s} · not MBA-relevant: ${d.non}`; svg.appendChild(b2);
+    if(wm>34){const t=el("text",{x:L+8,y:y+21,class:"vlabel",fill:"#fff"});t.textContent=d.mba;svg.appendChild(t);}
+    const val=el("text",{x:L+wm+wn+11,y:y+21,class:"vlabel"});
+    val.textContent=`${tot} · ${Math.round(100*d.mba/tot)}% MBA`; svg.appendChild(val);
+  });
+}
+
+function buildTables(){
+  const ft=document.getElementById("fundTable"); ft.innerHTML="";
+  [...SECTORS].sort((a,b)=>SECTOR_TOTALS[b].all-SECTOR_TOTALS[a].all).forEach(s=>{
+    const d=SECTOR_TOTALS[s]; ft.insertAdjacentHTML("beforeend",
+     `<tr><td>${s}</td><td>${d.all.toLocaleString()}</td><td>${d.m6.toLocaleString()}</td><td>${d.ytd.toLocaleString()}</td><td>${d.n}</td></tr>`);
+  });
+  const jt=document.getElementById("jobTable"); jt.innerHTML="";
+  [...SECTORS].sort((a,b)=>(JOBS[b].mba+JOBS[b].non)-(JOBS[a].mba+JOBS[a].non)).forEach(s=>{
+    const d=JOBS[s],t=d.mba+d.non; if(!t) return;
+    jt.insertAdjacentHTML("beforeend",
+     `<tr><td>${s}</td><td>${d.mba}</td><td>${d.non}</td><td>${t}</td><td>${Math.round(100*d.mba/t)}%</td></tr>`);
+  });
+}
+
+function buildFunnel(){
+  const fmax=Math.max(...FUNNEL.map(f=>f[1]));
+  document.getElementById("funnel").innerHTML=FUNNEL.map(([l,v],i)=>
+   `<div class="fr"><span>${l}</span><span class="fbar" style="width:${Math.max(v/fmax*100,1)}%;opacity:${1-i*0.11}"></span><span class="n">${v.toLocaleString()}</span></div>`).join("");
+}
+
+/* ── controls ── */
+document.querySelectorAll(".ctl button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".ctl button").forEach(x=>x.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true");
+  drawFunding(b.dataset.range); drawSectors(b.dataset.range);
+}));
+function renderAll(){ if(!SECTORS.length) return; const r=document.querySelector('.ctl button[aria-pressed="true"]').dataset.range;
+  drawFunding(r); drawSectors(r); drawJobs();}
+
+/* ── data load ──────────────────────────────────────────────────────
+   stats.json is regenerated by build_stats.py on every pipeline run.
+   It is fetched rather than inlined so the numbers can refresh without
+   editing this file — and Notion is queried server-side, so no API token
+   is ever shipped to the browser. */
+function fail(msg){
+  const b=document.createElement("p");
+  b.className="asof";
+  b.style.cssText="color:#b3261e;border:1px solid currentColor;border-radius:8px;padding:10px 12px";
+  b.textContent="Could not load stats.json — charts below are unavailable. "+msg;
+  document.querySelector(".asof").after(b);
+}
+
+fetch("stats.json",{cache:"no-store"})
+  .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+  .then(S=>{
+    SECTORS=S.sectors; MONTHLY=S.monthly; SECTOR_TOTALS=S.sector_totals;
+    JOBS=S.jobs; RANGES=S.ranges; RANGE_LABEL=S.range_labels; FUNNEL=S.funnel;
+
+    const gen=new Date(S.generated_at).toLocaleDateString("en-GB",
+      {day:"numeric",month:"short",year:"numeric"});
+    const thru=S.funding_through
+      ? new Date(S.funding_through+"T00:00:00").toLocaleDateString("en-GB",
+          {day:"numeric",month:"short",year:"numeric"})
+      : "unknown";
+    document.querySelector(".asof").textContent =
+      `Live from Notion \u00b7 last refreshed ${gen}. Funding data covers deals through ${thru}.`;
+
+    buildTiles(S); buildLegend(); buildTables(); buildFunnel(); renderAll();
+  })
+  .catch(e=>fail(e.message));
+
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",renderAll);
+new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+</script>
+
+</body>
+</html>

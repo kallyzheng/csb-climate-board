@@ -35,7 +35,7 @@
   .viz-root{
     font-family: ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     background:var(--surface-1); color:var(--text-primary);
-    padding:28px 22px 56px; max-width:1120px; margin:0 auto; line-height:1.45;
+    padding:28px 32px 56px; max-width:1600px; margin:0 auto; line-height:1.45;
   }
   h1{font-size:1.5rem;margin:0 0 4px;letter-spacing:-.015em}
   .sub{color:var(--text-secondary);font-size:.85rem;margin:0 0 6px}
@@ -43,6 +43,10 @@
   h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;
      color:var(--text-secondary);margin:40px 0 4px;font-weight:600}
   .h2note{color:var(--text-muted);font-size:.75rem;margin:0 0 16px}
+  /* charts/tables/tiles fill the width; running text past ~78 chars a
+     line just gets harder to read, so prose keeps its own cap. */
+  .sub,.asof,.h2note{max-width:78ch}
+  .note{max-width:88ch}
   section:first-of-type h2{margin-top:8px}
 
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
@@ -57,6 +61,16 @@
   .ctl button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
   .ctl .lbl{font-size:.72rem;color:var(--text-muted);margin-right:2px}
 
+  .pies{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:28px;align-items:start;margin-top:8px}
+  .pie figcaption{font-size:.78rem;font-weight:600;color:var(--text-primary);margin-bottom:2px}
+  .pie .den{font-size:.72rem;color:var(--text-muted);margin-bottom:8px}
+  .pie svg{max-width:300px;margin:0 auto}
+  .plg{list-style:none;padding:0;margin:10px 0 0;font-size:.75rem}
+  .plg li{display:grid;grid-template-columns:12px 1fr auto auto;gap:8px;
+    align-items:center;padding:2px 0}
+  .plg .pc{font-variant-numeric:tabular-nums;color:var(--text-primary);font-weight:600}
+  .plg .vv{font-variant-numeric:tabular-nums;color:var(--text-muted);min-width:62px;text-align:right}
   .legend{display:flex;flex-wrap:wrap;gap:11px;margin:12px 0 0;font-size:.75rem;color:var(--text-secondary)}
   .legend span{display:inline-flex;align-items:center;gap:5px}
   .sw{width:10px;height:10px;border-radius:2px;flex:none}
@@ -144,12 +158,25 @@
 
     <h2 style="margin-top:30px">Funding by sector</h2>
     <p class="h2note" id="sectorNote">All 13 months</p>
-    <div class="chart"><svg id="sectorChart" viewBox="0 0 940 220" role="img"
-      aria-label="Total disclosed funding by climate sector"></svg></div>
+    <div class="pies">
+      <figure class="pie">
+        <figcaption>Share of capital</figcaption>
+        <div class="den">of total disclosed $ — skewed by a few very large rounds</div>
+        <svg id="pieMoney" role="img" aria-label="Share of disclosed funding by sector"></svg>
+        <ul class="plg" id="legMoney"></ul>
+      </figure>
+      <figure class="pie">
+        <figcaption>Share of companies raising</figcaption>
+        <div class="den">of all companies with a qualifying deal — tracks hiring better</div>
+        <svg id="pieCos" role="img" aria-label="Share of companies raising by sector"></svg>
+        <ul class="plg" id="legCos"></ul>
+      </figure>
+    </div>
 
     <details>
       <summary>Table view — funding by sector</summary>
-      <table><thead><tr><th>Sector</th><th>All 13 mo ($M)</th><th>Last 6 mo ($M)</th><th>YTD 2026 ($M)</th><th>Deals</th></tr></thead>
+      <p class="h2note" id="fundTableNote" style="margin:6px 0 0"></p>
+      <table><thead><tr><th>Sector</th><th>Total ($M)</th><th>% of $</th><th>Companies raising</th><th>% of companies</th><th>Median ticket ($M)</th><th>Avg ticket ($M)</th><th>% disclosed</th></tr></thead>
         <tbody id="fundTable"></tbody></table>
     </details>
   </section>
@@ -204,10 +231,14 @@
 </div>
 
 <script>
-let SECTORS=[], MONTHLY={}, SECTOR_TOTALS={}, JOBS={}, RANGES={}, RANGE_LABEL={}, FUNNEL=[];
+let SECTORS=[], MONTHLY={}, SECTOR_TOTALS={}, SECTOR_STATS={}, JOBS={}, RANGES={}, RANGE_LABEL={}, FUNNEL=[];
 const SC = ["--s1","--s2","--s3","--s4","--s5","--s6"];
 const cv = n => getComputedStyle(document.querySelector(".viz-root")).getPropertyValue(n).trim();
 const NS = "http://www.w3.org/2000/svg";
+/* Charts draw at their container's real pixel width, so the 10-11.5px SVG
+   labels render at true size instead of being scaled up with the viewBox. */
+const chartW = svg => Math.max(640,
+  Math.round(svg.parentNode.getBoundingClientRect().width) || 940);
 const el = (t,a={})=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
 const money = v => v>=1000 ? "$"+(v/1000).toFixed(1)+"B" : "$"+Math.round(v)+"M";
 const short = s => ({"Food/Ag & Nature":"Food/Ag","GHG Removal":"GHG Rem."})[s]||s;
@@ -265,7 +296,8 @@ function buildLegend(){
 /* ── monthly stacked bars ── */
 function drawFunding(range){
   const svg=document.getElementById("fundChart"); svg.textContent="";
-  const months=RANGES[range], W=940,H=300, L=54,R=14,T=16,B=42;
+  const months=RANGES[range], W=chartW(svg),H=300, L=54,R=14,T=16,B=42;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
   const iw=W-L-R, ih=H-T-B;
   const tot=months.map(m=>SECTORS.reduce((a,s)=>a+(MONTHLY[m][s]||0),0));
   const max=Math.max(...tot)*1.08;
@@ -294,27 +326,71 @@ function drawFunding(range){
   const ax=el("text",{x:L,y:H-6,class:"vlabel"}); ax.textContent="Disclosed deal value, $M per month"; g.appendChild(ax);
 }
 
-/* ── sector totals: horizontal bars w/ direct labels ── */
-function drawSectors(range){
-  const svg=document.getElementById("sectorChart"); svg.textContent="";
-  document.getElementById("sectorNote").textContent=RANGE_LABEL[range];
-  const key=range, W=940,L=132,R=96,T=8, rowH=32;
-  const rows=[...SECTORS].sort((a,b)=>SECTOR_TOTALS[b][key]-SECTOR_TOTALS[a][key]);
-  const max=Math.max(...rows.map(s=>SECTOR_TOTALS[s][key]));
-  svg.setAttribute("viewBox",`0 0 ${W} ${T+rows.length*rowH+10}`);
-  rows.forEach((s,i)=>{
-    const y=T+i*rowH, v=SECTOR_TOTALS[s][key], w=Math.max((v/max)*(W-L-R),2);
-    const lab=el("text",{x:L-10,y:y+18,"text-anchor":"end",class:"rowlabel"}); lab.textContent=s; svg.appendChild(lab);
-    const bar=el("rect",{x:L,y:y+5,width:w,height:20,rx:4,fill:cv(SC[SECTORS.indexOf(s)])});
-    bar.appendChild(el("title")).textContent=`${s}: $${v}M`; svg.appendChild(bar);
-    const val=el("text",{x:L+w+9,y:y+19,class:"vlabel"}); val.textContent=money(v); svg.appendChild(val);
+/* ── sector share: two donuts, same categories, different measures ──
+   Deliberately a pair. Dollars and company counts rank the sectors
+   differently, and showing them side by side is the whole point. The total
+   sits in each hole so every percentage has a visibly named denominator --
+   one is a share of dollars, the other a share of companies. */
+function donut(svgId, legId, items, centreTop, centreBot){
+  const svg=document.getElementById(svgId); svg.textContent="";
+  const legend=document.getElementById(legId); legend.innerHTML="";
+  const S=280, cx=S/2, cy=S/2, rO=S/2-6, rI=rO*0.6;
+  svg.setAttribute("viewBox",`0 0 ${S} ${S}`);
+  const total=items.reduce((a,b)=>a+b.value,0);
+  if(!total) return;
+  let ang=-Math.PI/2;
+  items.forEach(it=>{
+    const frac=it.value/total, sweep=frac*Math.PI*2, a0=ang, a1=ang+sweep;
+    ang=a1;
+    const big = sweep>Math.PI ? 1 : 0;
+    const P=(r,a)=>[cx+r*Math.cos(a), cy+r*Math.sin(a)];
+    const [x0,y0]=P(rO,a0), [x1,y1]=P(rO,a1), [x2,y2]=P(rI,a1), [x3,y3]=P(rI,a0);
+    // A full-circle slice can't be drawn as one arc (start == end), so nudge it.
+    const d = frac>0.999
+      ? `M ${cx-rO},${cy} A ${rO},${rO} 0 1,1 ${cx+rO},${cy} A ${rO},${rO} 0 1,1 ${cx-rO},${cy} Z`
+      : `M ${x0},${y0} A ${rO},${rO} 0 ${big},1 ${x1},${y1} L ${x2},${y2} `
+       +`A ${rI},${rI} 0 ${big},0 ${x3},${y3} Z`;
+    const path=el("path",{d, fill:it.color, stroke:cv("--surface-1"), "stroke-width":1.5});
+    path.appendChild(el("title")).textContent=`${it.label}: ${it.display} (${(frac*100).toFixed(1)}%)`;
+    svg.appendChild(path);
   });
+  const t1=el("text",{x:cx,y:cy-2,"text-anchor":"middle",class:"rowlabel"});
+  t1.setAttribute("style","font-size:19px;font-weight:650");
+  t1.textContent=centreTop; svg.appendChild(t1);
+  const t2=el("text",{x:cx,y:cy+15,"text-anchor":"middle",class:"vlabel"});
+  t2.textContent=centreBot; svg.appendChild(t2);
+
+  items.forEach(it=>{
+    const pc=(100*it.value/total).toFixed(1);
+    legend.insertAdjacentHTML("beforeend",
+      `<li><i class="sw" style="background:${it.color}"></i>`
+     +`<span>${it.label}</span><span class="pc">${pc}%</span>`
+     +`<span class="vv">${it.display}</span></li>`);
+  });
+}
+
+function drawSectors(range){
+  document.getElementById("sectorNote").textContent=RANGE_LABEL[range];
+  // Same slice ORDER and COLOUR in both donuts, so the eye can track one
+  // sector across the pair. Sorting each independently would break that.
+  const order=[...SECTORS].sort((a,b)=>
+    SECTOR_STATS[b][range].total-SECTOR_STATS[a][range].total);
+  const colour=s=>cv(SC[SECTORS.indexOf(s)]);
+  const money$=order.map(s=>({label:short(s), color:colour(s),
+    value:SECTOR_STATS[s][range].total, display:money(SECTOR_STATS[s][range].total)}));
+  const cos=order.map(s=>({label:short(s), color:colour(s),
+    value:SECTOR_STATS[s][range].companies,
+    display:SECTOR_STATS[s][range].companies.toLocaleString()}));
+  const tm=money$.reduce((a,b)=>a+b.value,0);
+  const tc=cos.reduce((a,b)=>a+b.value,0);
+  donut("pieMoney","legMoney",money$, money(tm), "disclosed");
+  donut("pieCos","legCos",cos, tc.toLocaleString(), "companies");
 }
 
 /* ── jobs: MBA vs not, stacked ── */
 function drawJobs(){
   const svg=document.getElementById("jobChart"); svg.textContent="";
-  const W=940,L=132,R=118,T=8,rowH=34;
+  const W=chartW(svg),L=132,R=118,T=8,rowH=34;
   const rows=[...SECTORS].sort((a,b)=>(JOBS[b].mba+JOBS[b].non)-(JOBS[a].mba+JOBS[a].non));
   const max=Math.max(...rows.map(s=>JOBS[s].mba+JOBS[s].non));
   svg.setAttribute("viewBox",`0 0 ${W} ${T+rows.length*rowH+10}`);
@@ -332,11 +408,23 @@ function drawJobs(){
   });
 }
 
-function buildTables(){
+function buildTables(range){
   const ft=document.getElementById("fundTable"); ft.innerHTML="";
-  [...SECTORS].sort((a,b)=>SECTOR_TOTALS[b].all-SECTOR_TOTALS[a].all).forEach(s=>{
-    const d=SECTOR_TOTALS[s]; ft.insertAdjacentHTML("beforeend",
-     `<tr><td>${s}</td><td>${d.all.toLocaleString()}</td><td>${d.m6.toLocaleString()}</td><td>${d.ytd.toLocaleString()}</td><td>${d.n}</td></tr>`);
+  document.getElementById("fundTableNote").textContent=
+    RANGE_LABEL[range]+" · median is the typical ticket; the mean is pulled "+
+    "upward by a few very large rounds, so prefer the median.";
+  const totalCos = SECTORS.reduce((a,x)=>a+SECTOR_STATS[x][range].companies,0);
+  // Ranked by companies raising, not dollars: for a jobs board, hiring
+  // tracks how many companies raised more than how much they raised.
+  [...SECTORS].sort((a,b)=>SECTOR_STATS[b][range].companies-SECTOR_STATS[a][range].companies)
+  .forEach(s=>{
+    const d=SECTOR_STATS[s][range];
+    const disc = d.companies ? Math.round(100*d.disclosed/d.companies) : 0;
+    // Two separate share columns on purpose: a share of dollars and a
+    // share of companies have different denominators and rank differently.
+    const cshare = totalCos ? (100*d.companies/totalCos).toFixed(1) : "0.0";
+    ft.insertAdjacentHTML("beforeend",
+     `<tr><td>${s}</td><td>${d.total.toLocaleString()}</td><td>${d.share}%</td><td>${d.companies}</td><td>${cshare}%</td><td>${d.median.toLocaleString()}</td><td>${d.mean.toLocaleString()}</td><td>${disc}%</td></tr>`);
   });
   const jt=document.getElementById("jobTable"); jt.innerHTML="";
   [...SECTORS].sort((a,b)=>(JOBS[b].mba+JOBS[b].non)-(JOBS[a].mba+JOBS[a].non)).forEach(s=>{
@@ -359,7 +447,7 @@ document.querySelectorAll(".ctl button").forEach(b=>b.addEventListener("click",(
   drawFunding(b.dataset.range); drawSectors(b.dataset.range);
 }));
 function renderAll(){ if(!SECTORS.length) return; const r=document.querySelector('.ctl button[aria-pressed="true"]').dataset.range;
-  drawFunding(r); drawSectors(r); drawJobs();}
+  drawFunding(r); drawSectors(r); drawJobs(); buildTables(r);}
 
 /* ── data load ──────────────────────────────────────────────────────
    stats.json is regenerated by build_stats.py on every pipeline run.
@@ -378,6 +466,7 @@ fetch("stats.json",{cache:"no-store"})
   .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
   .then(S=>{
     SECTORS=S.sectors; MONTHLY=S.monthly; SECTOR_TOTALS=S.sector_totals;
+    SECTOR_STATS=S.sector_stats;
     JOBS=S.jobs; RANGES=S.ranges; RANGE_LABEL=S.range_labels; FUNNEL=S.funnel;
 
     const gen=new Date(S.generated_at).toLocaleDateString("en-GB",
@@ -389,10 +478,21 @@ fetch("stats.json",{cache:"no-store"})
     document.querySelector(".asof").textContent =
       `Live from Notion \u00b7 last refreshed ${gen}. Funding data covers deals through ${thru}.`;
 
-    buildTiles(S); buildLegend(); buildTables(); buildFunnel(); renderAll();
+    buildTiles(S); buildLegend(); buildFunnel(); renderAll();
   })
   .catch(e=>fail(e.message));
 
+/* Redraw when the charts' container changes WIDTH. A ResizeObserver catches
+   cases a window "resize" event misses (zoom, devtools, layout shifts). The
+   width check matters: redrawing changes each SVG's height, which would
+   re-trigger the observer and loop forever if we reacted to every change. */
+let _lastW = 0, _rt;
+new ResizeObserver(es=>{
+  const w = Math.round(es[0].contentRect.width);
+  if (w === _lastW) return;
+  _lastW = w;
+  clearTimeout(_rt); _rt = setTimeout(renderAll, 120);
+}).observe(document.querySelector(".chart"));
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change",renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 </script>

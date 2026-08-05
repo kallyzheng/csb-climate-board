@@ -5,35 +5,35 @@
   "fund_ytd": 14350.8,
   "companies_with_deals": 1081,
   "companies_tracked": 1801,
-  "active_listings": 1717,
-  "boards_with_active": 145,
-  "mba_roles": 382,
+  "active_listings": 2104,
+  "boards_with_active": 177,
+  "mba_roles": 379,
   "n_mba_functions": 26,
   "n_excluded_functions": 8,
   "n_tech_categories": 99,
   "n_sectors": 6,
   "categorized": 1796,
   "pct_categorized": 99.7,
-  "pct_high_conf": 88.9,
-  "high_conf": 1526,
-  "classified": 1717,
-  "unclassified": 0,
-  "pct_classified": 100.0,
+  "pct_high_conf": 89.0,
+  "high_conf": 1521,
+  "classified": 1709,
+  "unclassified": 395,
+  "pct_classified": 81.2,
   "open_app_posts": 58,
-  "email_cta_companies": 58,
-  "open_app_companies": 26,
+  "email_cta_companies": 51,
+  "open_app_companies": 24,
   "careers_located": 645,
-  "supported_ats": 218,
-  "named_unsupported_ats": 25,
+  "supported_ats": 234,
+  "named_unsupported_ats": 28,
   "top_unsupported_ats": [
    "Paylocity",
    "Paycom",
    "iSolved"
   ],
-  "custom_pages": 402,
-  "reachable_extra": 84
+  "custom_pages": 383,
+  "reachable_extra": 75
  },
- "generated_at": "2026-08-04T22:54:21+00:00",
+ "generated_at": "2026-08-05T02:11:46+00:00",
  "funding_through": "2026-07-28",
  "sectors": [
   "Electricity",
@@ -271,30 +271,188 @@
    "n": 107
   }
  },
+ "sector_stats": {
+  "Electricity": {
+   "all": {
+    "total": 9570.3,
+    "companies": 420,
+    "disclosed": 278,
+    "median": 4.0,
+    "mean": 34.4,
+    "share": 40.7
+   },
+   "m6": {
+    "total": 6323.1,
+    "companies": 187,
+    "disclosed": 131,
+    "median": 5.6,
+    "mean": 48.3,
+    "share": 50.3
+   },
+   "ytd": {
+    "total": 6805.5,
+    "companies": 209,
+    "disclosed": 147,
+    "median": 5.5,
+    "mean": 46.3,
+    "share": 47.4
+   }
+  },
+  "Transportation": {
+   "all": {
+    "total": 4978.1,
+    "companies": 322,
+    "disclosed": 205,
+    "median": 2.8,
+    "mean": 24.3,
+    "share": 21.2
+   },
+   "m6": {
+    "total": 2920.6,
+    "companies": 118,
+    "disclosed": 82,
+    "median": 4.3,
+    "mean": 35.6,
+    "share": 23.2
+   },
+   "ytd": {
+    "total": 3083.4,
+    "companies": 141,
+    "disclosed": 98,
+    "median": 3.8,
+    "mean": 31.5,
+    "share": 21.5
+   }
+  },
+  "Manufacturing": {
+   "all": {
+    "total": 3871.3,
+    "companies": 427,
+    "disclosed": 252,
+    "median": 2.7,
+    "mean": 15.4,
+    "share": 16.5
+   },
+   "m6": {
+    "total": 2056.0,
+    "companies": 159,
+    "disclosed": 104,
+    "median": 3.0,
+    "mean": 19.8,
+    "share": 16.4
+   },
+   "ytd": {
+    "total": 2932.7,
+    "companies": 198,
+    "disclosed": 129,
+    "median": 3.0,
+    "mean": 22.7,
+    "share": 20.4
+   }
+  },
+  "Food/Ag & Nature": {
+   "all": {
+    "total": 3116.3,
+    "companies": 325,
+    "disclosed": 179,
+    "median": 1.9,
+    "mean": 17.4,
+    "share": 13.2
+   },
+   "m6": {
+    "total": 671.8,
+    "companies": 108,
+    "disclosed": 58,
+    "median": 1.0,
+    "mean": 11.6,
+    "share": 5.3
+   },
+   "ytd": {
+    "total": 755.3,
+    "companies": 124,
+    "disclosed": 70,
+    "median": 0.8,
+    "mean": 10.8,
+    "share": 5.3
+   }
+  },
+  "Buildings": {
+   "all": {
+    "total": 1496.5,
+    "companies": 195,
+    "disclosed": 109,
+    "median": 5.1,
+    "mean": 13.7,
+    "share": 6.4
+   },
+   "m6": {
+    "total": 391.2,
+    "companies": 67,
+    "disclosed": 33,
+    "median": 7.2,
+    "mean": 11.9,
+    "share": 3.1
+   },
+   "ytd": {
+    "total": 547.2,
+    "companies": 80,
+    "disclosed": 39,
+    "median": 8.0,
+    "mean": 14.0,
+    "share": 3.8
+   }
+  },
+  "GHG Removal": {
+   "all": {
+    "total": 501.1,
+    "companies": 107,
+    "disclosed": 53,
+    "median": 2.2,
+    "mean": 9.5,
+    "share": 2.1
+   },
+   "m6": {
+    "total": 201.3,
+    "companies": 31,
+    "disclosed": 15,
+    "median": 5,
+    "mean": 13.4,
+    "share": 1.6
+   },
+   "ytd": {
+    "total": 226.6,
+    "companies": 40,
+    "disclosed": 20,
+    "median": 4.0,
+    "mean": 11.3,
+    "share": 1.6
+   }
+  }
+ },
  "jobs": {
   "Electricity": {
-   "mba": 152,
-   "non": 584
+   "mba": 149,
+   "non": 826
   },
   "Transportation": {
    "mba": 42,
-   "non": 169
+   "non": 229
   },
   "Manufacturing": {
    "mba": 60,
-   "non": 155
+   "non": 201
   },
   "Food/Ag & Nature": {
    "mba": 42,
-   "non": 194
+   "non": 216
   },
   "Buildings": {
    "mba": 70,
-   "non": 200
+   "non": 219
   },
   "GHG Removal": {
    "mba": 16,
-   "non": 33
+   "non": 34
   }
  },
  "funnel": [
@@ -312,20 +470,20 @@
   ],
   [
    "On a supported ATS",
-   218
+   234
   ],
   [
    "Active listings harvested",
-   1717
+   2104
   ],
   [
    "MBA-relevant roles",
-   382
+   379
   ]
  ],
  "_diagnostics": {
   "companies_scanned": 1801,
-  "jobs_scanned": 2033,
+  "jobs_scanned": 2428,
   "active_jobs_without_sector": 0
  }
 }

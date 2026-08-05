@@ -8,28 +8,93 @@
 <body style="margin:0">
 
 <style>
+  /* ── DESIGN TOKENS ───────────────────────────────────────────────
+     Documented in BRAND.md at the repo root: what each token is for,
+     which are safe to change, the validation procedure, and why the
+     sector palette is NOT a branding surface. Read it before editing.
+     Tokens are declared THREE times (light, media-dark, data-theme
+     dark) — change all three together. */
   .viz-root{
     color-scheme: light;
-    --surface-1:#fcfcfb; --surface-2:#f4f4f1; --border:#e2e1dc;
+    /* Surface carries a faint violet cast so the NYU accent reads as
+       intentional rather than applied. Sector palette re-validated against it:
+       all six still pass. */
+    --surface-1:#faf8fc; --surface-2:#f3f0f7; --border:#e5e0ec;
     --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#77756f;
-    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300;
-    --neutral:#a8a69e; --accent:#2a78d6;
+    /* Sector hues at 85%% chroma. Hue (identity) is untouched; only
+       saturation drops, so they sit quieter against the muted violet
+       surface without collapsing into each other. 85%% is the floor:
+       at 75%% the dark set fails (normal-vision delta-E 14.6, under 15).
+       This trades CVD separation from the >=8 target down to the 6-8
+       band, which is legal ONLY because identity is never colour-alone
+       here -- every chart has a named legend with values and a table
+       view. Restore full chroma by reverting to the values in the
+       comment below if that ever stops being true. */
+    /* full-chroma originals: #2a78d6 #eb6834 #1baf7a #eda100 #e87ba4 #008300 */
+    --s1:#3b79c8; --s2:#e07148; --s3:#41ac7e; --s4:#e5a53f; --s5:#df82a4; --s6:#278024;
+    /* Neutral sits on the VIOLET axis (OKLCH h 300), not the warm h 95 it
+       had for the old graphite surface -- a 204 degree mismatch against a
+       violet-tinted surface, which is why it read as discordant. Chroma is
+       ~17% of the accent's, so it still reads as grey, and separation from
+       the accent stays at delta-E 39.2. */
+    --neutral:#a8a3b3;
+    /* NYU Violet, sampled from the NYUGreen lockup. Deliberately NOT --s1:
+       the accent used to be #2a78d6, the same blue as sector slot 1, so the
+       funnel read as "Electricity". Violet appears in no sector slot.
+       10.99:1 here; white on it 11.6:1. */
+    --accent:#57068c; --on-accent:#ffffff; --brand-green:#457724;
+    /* Funnel is ORDINAL (pipeline stages): one hue, monotone lightness -- not
+       six categorical hues, which would imply unrelated categories. fn1 sits
+       nearest the surface at 3.23:1, well clear of the 2:1 floor, because a
+       step that merely passes still visibly fades out. */
+    --fn1:#a179cf; --fn2:#8a60b7; --fn3:#7347a0;
+    --fn4:#5d2d89; --fn5:#481073; --fn6:#34005d;
   }
   @media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])) .lockup-light{display:none}
+  :root:where(:not([data-theme="light"])) .lockup-dark{display:block}
     :root:where(:not([data-theme="light"])) .viz-root{
       color-scheme: dark;
-      --surface-1:#1a1a19; --surface-2:#232322; --border:#3a3a37;
-      --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8d84;
-      --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300;
-      --neutral:#6b6961; --accent:#3987e5;
+      --surface-1:#17131f; --surface-2:#201a2b; --border:#362c46;
+      --text-primary:#f6f2fa; --text-secondary:#c6bdd2; --text-muted:#948aa3;
+      /* full-chroma originals: #3987e5 #d95926 #199e70 #c98500 #d55181 #008300 */
+      --s1:#4988d7; --s2:#ce633b; --s3:#3a9b74; --s4:#c28833; --s5:#cb5c82; --s6:#278024;
+      /* Neutral sits on the VIOLET axis (OKLCH h 300), not the warm h 95 it
+      had for the old graphite surface -- a 204 degree mismatch against a
+      violet-tinted surface, which is why it read as discordant. Chroma is
+      ~17% of the accent's, so it still reads as grey, and separation from
+      the accent stays at delta-E 18.8. */
+      --neutral:#6b6676;
+      /* Dark is SELECTED, not flipped: NYU Violet #57068c scores 1.50:1 on this
+         surface and is unusable. Same hue, lighter step -> 5.54:1. Being light it
+         needs DARK text, hence --on-accent inverting. Green likewise comes from
+         the lockup's own dark variant (#7cb247, 7.24:1), not a computed step. */
+      --accent:#a778dc; --on-accent:#1a1a19; --brand-green:#7cb247;
+      --fn1:#77579c; --fn2:#926ebb; --fn3:#ad85db;
+      --fn4:#c99dfd; --fn5:#e6b6ff; --fn6:#ffcfff;
     }
   }
+  :root[data-theme="dark"] .lockup-light{display:none}
+  :root[data-theme="dark"] .lockup-dark{display:block}
   :root[data-theme="dark"] .viz-root{
     color-scheme: dark;
-    --surface-1:#1a1a19; --surface-2:#232322; --border:#3a3a37;
-    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8f8d84;
-    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300;
-    --neutral:#6b6961; --accent:#3987e5;
+    --surface-1:#17131f; --surface-2:#201a2b; --border:#362c46;
+    --text-primary:#f6f2fa; --text-secondary:#c6bdd2; --text-muted:#948aa3;
+    /* full-chroma originals: #3987e5 #d95926 #199e70 #c98500 #d55181 #008300 */
+    --s1:#4988d7; --s2:#ce633b; --s3:#3a9b74; --s4:#c28833; --s5:#cb5c82; --s6:#278024;
+    /* Neutral sits on the VIOLET axis (OKLCH h 300), not the warm h 95 it
+    had for the old graphite surface -- a 204 degree mismatch against a
+    violet-tinted surface, which is why it read as discordant. Chroma is
+    ~17% of the accent's, so it still reads as grey, and separation from
+    the accent stays at delta-E 18.8. */
+    --neutral:#6b6676;
+    /* Dark is SELECTED, not flipped: NYU Violet #57068c scores 1.50:1 on this
+       surface and is unusable. Same hue, lighter step -> 5.54:1. Being light it
+       needs DARK text, hence --on-accent inverting. Green likewise comes from
+       the lockup's own dark variant (#7cb247, 7.24:1), not a computed step. */
+    --accent:#a778dc; --on-accent:#1a1a19; --brand-green:#7cb247;
+    --fn1:#77579c; --fn2:#926ebb; --fn3:#ad85db;
+    --fn4:#c99dfd; --fn5:#e6b6ff; --fn6:#ffcfff;
   }
 
   .viz-root{
@@ -37,11 +102,18 @@
     background:var(--surface-1); color:var(--text-primary);
     padding:28px 32px 56px; max-width:1600px; margin:0 auto; line-height:1.45;
   }
+  /* Masthead. Two <img> rather than one swapped src so the correct lockup is
+     in the markup for both themes and neither flashes on load. */
+  .brand{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+  .lockup{height:30px;width:auto;display:block}
+  .lockup-dark{display:none}
+  .brandrule{height:3px;border-radius:2px;margin:0 0 22px;
+    background:linear-gradient(90deg,var(--accent) 0 62%,var(--brand-green) 62% 100%)}
   h1{font-size:1.5rem;margin:0 0 4px;letter-spacing:-.015em}
   .sub{color:var(--text-secondary);font-size:.85rem;margin:0 0 6px}
   .asof{color:var(--text-muted);font-size:.75rem;margin:0 0 30px}
   h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;
-     color:var(--text-secondary);margin:40px 0 4px;font-weight:600}
+     color:var(--brand-green);margin:40px 0 4px;font-weight:600}
   .h2note{color:var(--text-muted);font-size:.75rem;margin:0 0 16px}
   /* charts/tables/tiles fill the width; running text past ~78 chars a
      line just gets harder to read, so prose keeps its own cap. */
@@ -58,7 +130,7 @@
   .ctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
   .ctl button{font:inherit;font-size:.75rem;padding:5px 11px;border-radius:999px;
     border:1px solid var(--border);background:var(--surface-1);color:var(--text-secondary);cursor:pointer}
-  .ctl button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .ctl button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
   .ctl .lbl{font-size:.72rem;color:var(--text-muted);margin-right:2px}
 
   .pies{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -115,9 +187,16 @@
 </style>
 
 <div class="viz-root">
+  <div class="brand">
+    <img class="lockup lockup-light" src="nyugreen-lockup-light.png"
+         alt="NYU Green" width="2083" height="307">
+    <img class="lockup lockup-dark" src="nyugreen-lockup-dark.png"
+         alt="NYU Green" width="2083" height="307">
+  </div>
   <h1>CSB Climate Job Board</h1>
   <p class="sub">Automated pipeline: PitchBook company universe → climate-tech classification → careers-page discovery → job harvesting → MBA relevance classification.</p>
   <p class="asof">Funding data reflects the PitchBook pull of 27 Apr 2026 (deals Apr 2025–Apr 2026). Job data live as of 29 Jul 2026.</p>
+      <div class="brandrule"></div>
 
   <!-- ───────── 0. LIVE BOARD ───────── -->
   <section>
@@ -196,7 +275,7 @@
     <div class="chart"><svg id="jobChart" viewBox="0 0 940 250" role="img"
       aria-label="Active jobs by climate sector, split into MBA-relevant and not MBA-relevant"></svg></div>
     <div class="legend">
-      <span><i class="sw" style="background:var(--s1)"></i> MBA-relevant</span>
+      <span><i class="sw" style="background:var(--accent)"></i> MBA-relevant</span>
       <span><i class="sw" style="background:var(--neutral)"></i> Not MBA-relevant (engineering, science, trades)</span>
     </div>
 
@@ -398,11 +477,11 @@ function drawJobs(){
     const y=T+i*rowH, d=JOBS[s], tot=d.mba+d.non, iw=W-L-R;
     const lab=el("text",{x:L-10,y:y+20,"text-anchor":"end",class:"rowlabel"}); lab.textContent=s; svg.appendChild(lab);
     const wm=(d.mba/max)*iw, wn=(d.non/max)*iw;
-    const b1=el("rect",{x:L,y:y+6,width:Math.max(wm,2),height:21,rx:4,fill:cv("--s1")});
+    const b1=el("rect",{x:L,y:y+6,width:Math.max(wm,2),height:21,rx:4,fill:cv("--accent")});
     b1.appendChild(el("title")).textContent=`${s} · MBA-relevant: ${d.mba}`; svg.appendChild(b1);
     const b2=el("rect",{x:L+wm+2,y:y+6,width:Math.max(wn,2),height:21,rx:4,fill:cv("--neutral")});
     b2.appendChild(el("title")).textContent=`${s} · not MBA-relevant: ${d.non}`; svg.appendChild(b2);
-    if(wm>34){const t=el("text",{x:L+8,y:y+21,class:"vlabel",fill:"#fff"});t.textContent=d.mba;svg.appendChild(t);}
+    if(wm>34){const t=el("text",{x:L+8,y:y+21,class:"vlabel",fill:cv("--on-accent")});t.textContent=d.mba;svg.appendChild(t);}
     const val=el("text",{x:L+wm+wn+11,y:y+21,class:"vlabel"});
     val.textContent=`${tot} · ${Math.round(100*d.mba/tot)}% MBA`; svg.appendChild(val);
   });
@@ -437,7 +516,7 @@ function buildTables(range){
 function buildFunnel(){
   const fmax=Math.max(...FUNNEL.map(f=>f[1]));
   document.getElementById("funnel").innerHTML=FUNNEL.map(([l,v],i)=>
-   `<div class="fr"><span>${l}</span><span class="fbar" style="width:${Math.max(v/fmax*100,1)}%;opacity:${1-i*0.11}"></span><span class="n">${v.toLocaleString()}</span></div>`).join("");
+   `<div class="fr"><span>${l}</span><span class="fbar" style="width:${Math.max(v/fmax*100,1)}%;background:var(--fn${i+1})"></span><span class="n">${v.toLocaleString()}</span></div>`).join("");
 }
 
 /* ── controls ── */

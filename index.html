@@ -104,6 +104,21 @@
   }
   /* Masthead. Two <img> rather than one swapped src so the correct lockup is
      in the markup for both themes and neither flashes on load. */
+  /* ── Tabs ────────────────────────────────────────────────────────
+     Three panels: two Notion embeds and the metrics. Split because the
+     audiences differ -- a student wants the boards and never the funnel;
+     CSB/NYU want the funnel and don't need to scroll a job table. Stacking
+     two 620px iframes ahead of the metrics would bury them anyway. */
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin:0 0 20px;
+    flex-wrap:wrap}
+  .tabs button{font:inherit;font-size:.82rem;font-weight:560;padding:9px 15px;
+    background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+    color:var(--text-secondary);cursor:pointer;border-radius:6px 6px 0 0}
+  .tabs button:hover{color:var(--text-primary);background:var(--surface-2)}
+  .tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);
+    font-weight:660}
+  .tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  [role="tabpanel"][hidden]{display:none}
   .brand{display:flex;align-items:center;gap:12px;margin:0 0 14px}
   .lockup{height:30px;width:auto;display:block}
   .lockup-dark{display:none}
@@ -195,8 +210,15 @@
   </div>
   <h1>CSB Climate Job Board</h1>
   <p class="sub">Automated pipeline: PitchBook company universe → climate-tech classification → careers-page discovery → job harvesting → MBA relevance classification.</p>
-  <p class="asof">Funding data reflects the PitchBook pull of 27 Apr 2026 (deals Apr 2025–Apr 2026). Job data live as of 29 Jul 2026.</p>
       <div class="brandrule"></div>
+
+  <div class="tabs" role="tablist" aria-label="Views">
+    <button role="tab" id="tab-board"   aria-controls="panel-board"   aria-selected="true"  data-tab="board">Job board</button>
+    <button role="tab" id="tab-pitch"   aria-controls="panel-pitch"   aria-selected="false" data-tab="pitch" tabindex="-1">Pitch yourself</button>
+    <button role="tab" id="tab-metrics" aria-controls="panel-metrics" aria-selected="false" data-tab="metrics" tabindex="-1">Metrics</button>
+  </div>
+
+  <div role="tabpanel" id="panel-board" aria-labelledby="tab-board" tabindex="0">
 
   <!-- ───────── 0. LIVE BOARD ───────── -->
   <section>
@@ -211,6 +233,33 @@
          target="_blank" rel="noopener">Open full board in Notion &#8599;</a>
     </p>
   </section>
+
+  </div><!-- /panel-board -->
+
+  <div role="tabpanel" id="panel-pitch" aria-labelledby="tab-pitch" tabindex="0" hidden>
+    <section>
+      <h2>Pitch yourself</h2>
+      <p class="h2note">Recently funded companies with <b>no posted role</b> — reachable by cold
+        email or an open application. These never appear on the job board, so this is the
+        larger half of the opportunity.</p>
+      <div class="embed">
+        <iframe data-src="https://roasted-gondola-2df.notion.site/ebd/3b36c669575c8094a23fc4fc8516c90d"
+                <!-- No ?v= here on purpose. That view id renders a BLANK iframe --
+                     HTTP 200, Notion chrome, no rows, no error. Dropping it falls
+                     back to the default view, which renders. The job-board embed
+                     above keeps its ?v= because that view does work. -->
+                title="Pitch Yourself Companies — live Notion database" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="h2note" style="margin-top:8px">
+        <a href="https://roasted-gondola-2df.notion.site/3b36c669575c8094a23fc4fc8516c90d?v=3b36c669575c80fbbe47000cae3eacc9"
+           target="_blank" rel="noopener">Open full list in Notion &#8599;</a>
+      </p>
+    </section>
+  </div><!-- /panel-pitch -->
+
+  <div role="tabpanel" id="panel-metrics" aria-labelledby="tab-metrics" tabindex="0" hidden>
+    <p class="asof" id="asof"></p>
+
 
   <!-- ───────── 1. FUNDING ───────── -->
   <section>
@@ -307,6 +356,7 @@
       <b>Known coverage gap.</b> <span id="pCareers">&mdash;</span> companies have a careers page; <span id="pAts">&mdash;</span> sit on ATS platforms the harvester supports today. A further <span id="pUnsup">&mdash;</span> are on identified but not-yet-integrated platforms (<span id="pUnsupList">&mdash;</span> and others), and <span id="pCustom">&mdash;</span> use custom pages requiring HTML extraction — the next expansion targets.
       </div>
   </section>
+  </div><!-- /panel-metrics -->
 </div>
 
 <script>
@@ -554,7 +604,7 @@ fetch("stats.json",{cache:"no-store"})
       ? new Date(S.funding_through+"T00:00:00").toLocaleDateString("en-GB",
           {day:"numeric",month:"short",year:"numeric"})
       : "unknown";
-    document.querySelector(".asof").textContent =
+    document.getElementById("asof").textContent =
       `Live from Notion \u00b7 last refreshed ${gen}. Funding data covers deals through ${thru}.`;
 
     buildTiles(S); buildLegend(); buildFunnel(); renderAll();
@@ -572,6 +622,54 @@ new ResizeObserver(es=>{
   _lastW = w;
   clearTimeout(_rt); _rt = setTimeout(renderAll, 120);
 }).observe(document.querySelector(".chart"));
+/* ── Tabs ───────────────────────────────────────────────────────────
+   Three things here are load-bearing:
+
+   1. REDRAW ON SHOW. The charts size themselves from their container's
+      rendered width, and inside a hidden panel that width is 0 — they would
+      draw at the 640px clamp and stay wrong. Every activation re-runs
+      renderAll() once the panel is visible.
+   2. LAZY IFRAMES. Each embed keeps its URL in data-src until its tab is
+      first opened, so a visitor who never opens "Pitch yourself" never pays
+      for a second Notion load.
+   3. HASH SYNC. The active tab is mirrored to location.hash so a specific
+      view can be linked — #metrics goes straight to the funnel. */
+const TABS = [...document.querySelectorAll('[role="tab"]')];
+const PANELS = Object.fromEntries(TABS.map(t =>
+  [t.dataset.tab, document.getElementById(t.getAttribute("aria-controls"))]));
+
+function showTab(name, {focus = false, push = true} = {}){
+  if(!PANELS[name]) name = "board";
+  TABS.forEach(t => {
+    const on = t.dataset.tab === name;
+    t.setAttribute("aria-selected", on ? "true" : "false");
+    t.tabIndex = on ? 0 : -1;
+    PANELS[t.dataset.tab].hidden = !on;
+    if(on && focus) t.focus();
+  });
+
+  const panel = PANELS[name];
+  panel.querySelectorAll("iframe[data-src]").forEach(f => {
+    f.src = f.dataset.src; f.removeAttribute("data-src");
+  });
+  // after the panel is visible, so the charts measure a real width
+  if(name === "metrics") requestAnimationFrame(() => renderAll());
+  if(push && location.hash.slice(1) !== name) history.replaceState(null, "", "#" + name);
+}
+
+TABS.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+document.querySelector('[role="tablist"]').addEventListener("keydown", e => {
+  const i = TABS.findIndex(t => t.getAttribute("aria-selected") === "true");
+  let j = null;
+  if(e.key === "ArrowRight") j = (i + 1) % TABS.length;
+  if(e.key === "ArrowLeft")  j = (i - 1 + TABS.length) % TABS.length;
+  if(e.key === "Home")       j = 0;
+  if(e.key === "End")        j = TABS.length - 1;
+  if(j !== null){ e.preventDefault(); showTab(TABS[j].dataset.tab, {focus:true}); }
+});
+addEventListener("hashchange", () => showTab(location.hash.slice(1), {push:false}));
+showTab(location.hash.slice(1) || "board", {push:false});
+
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change",renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 </script>

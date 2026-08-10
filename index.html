@@ -104,6 +104,44 @@
   }
   /* Masthead. Two <img> rather than one swapped src so the correct lockup is
      in the markup for both themes and neither flashes on load. */
+  /* ── Pitch-yourself guide ───────────────────────────────────────── */
+  .lede{font-size:.92rem;color:var(--text-primary);margin:0 0 6px;line-height:1.5}
+  .stat{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 26px}
+  @media(min-width:760px){ .stat{grid-template-columns:repeat(4,1fr)} }
+  .stat div{background:var(--surface-2);border:1px solid var(--border);
+    border-left:3px solid var(--accent);border-radius:0 9px 9px 0;padding:11px 13px}
+  .stat .n{font-size:1.3rem;font-weight:660;font-variant-numeric:tabular-nums;
+    color:var(--text-primary)}
+  .stat .c{font-size:.7rem;color:var(--text-secondary);margin-top:3px;line-height:1.35}
+  .steps{counter-reset:st;list-style:none;padding:0;margin:6px 0 0}
+  .steps li{counter-increment:st;position:relative;padding:0 0 0 32px;margin:0 0 14px;
+    font-size:.82rem;color:var(--text-secondary);max-width:76ch;line-height:1.5}
+  .steps li::before{content:counter(st);position:absolute;left:0;top:0;width:21px;height:21px;
+    border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:.68rem;
+    font-weight:700;display:grid;place-items:center}
+  .steps b{color:var(--text-primary)}
+  .stage{display:grid;grid-template-columns:78px 1fr;gap:9px 14px;font-size:.8rem;
+    color:var(--text-secondary);margin:10px 0 0;max-width:76ch;line-height:1.5}
+  .stage dt{font-weight:700;color:var(--text-primary);font-variant-numeric:tabular-nums}
+  .stage dd{margin:0}
+  .cta{background:var(--surface-2);border:1px solid var(--border);
+    border-left:3px solid var(--brand-green);border-radius:0 10px 10px 0;padding:15px 17px;
+    margin:24px 0 0;font-size:.82rem;color:var(--text-secondary);line-height:1.5}
+  .cta b{color:var(--text-primary)}
+  /* The guide is laid out ACROSS the width rather than stacked, purely to cut
+     its vertical height -- stacked it ran ~1400px and pushed the table off
+     screen. The embed stays FULL WIDTH: narrowing it into a side column would
+     hurt the one thing people actually came to read. */
+  .phead{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+  .pguide{display:grid;grid-template-columns:1fr;gap:24px 34px;align-items:start;margin-top:4px}
+  .pguide > *{min-width:0}
+  .pguide h2{margin-top:0}
+  .pfull{grid-column:1/-1}
+  @media(min-width:900px){ .pguide{grid-template-columns:1fr 1fr} }
+  @media(min-width:1280px){ .pguide{grid-template-columns:1fr 1fr 1fr} }
+  /* columns are narrower than the page, so bring the reading measure down too */
+  .pguide .steps li,.pguide .stage,.pguide .h2note{max-width:60ch}
+  .phead .stat{margin:6px 0 0}
   /* ── Tabs ────────────────────────────────────────────────────────
      Three panels: two Notion embeds and the metrics. Split because the
      audiences differ -- a student wants the boards and never the funnel;
@@ -238,17 +276,86 @@
 
   <div role="tabpanel" id="panel-pitch" aria-labelledby="tab-pitch" tabindex="0" hidden>
     <section>
-      <h2>Pitch yourself</h2>
-      <p class="h2note">Recently funded companies with <b>no posted role</b> — reachable by cold
-        email or an open application. These never appear on the job board, so this is the
-        larger half of the opportunity.</p>
+      <h2>Pitch yourself &mdash; how to reach a startup with no job ad</h2>
+      <div class="phead">
+        <p class="lede" id="pitchLede"></p>
+        <div class="stat" id="pitchStats"></div>
+      </div>
+
+      <div class="pguide">
+
+      <div>
+      <h2>1 &middot; Why this works</h2>
+      <p class="h2note" id="pitchWhy"></p>
+      </div>
+
+      <div>
+      <h2>2 &middot; How to do it</h2>
+      <ol class="steps">
+        <li><b>Pick a company, not a posting.</b> There is nothing to apply to &mdash; that is the
+          advantage. You arrive before the ad exists, and before it draws hundreds of applicants.</li>
+        <li><b>Use the Pitch Route column.</b> <b>Cold Email</b> means a real address and no form.
+          <b>Open Application</b> means the company has explicitly invited exactly this, so start
+          there if you are new to cold outreach.</li>
+        <li><b>Lead with the work, not your CV.</b> Name one problem you would own in the first
+          ninety days &mdash; a pricing analysis, a channel test, a supplier comparison &mdash; and
+          why it matters at their size. &ldquo;Do you have any openings?&rdquo; gets nothing;
+          &ldquo;here is the gap I think you have, and how I would close it&rdquo; gets a reply.</li>
+        <li><b>Show you did the reading.</b> Reference their raise, their product, their market.
+          The Notion row gives you sector, headcount, total raised and weeks since raise before
+          you have opened a single tab.</li>
+        <li><b>Keep it to five sentences and one ask.</b> Suggest a 20-minute call. Attach nothing
+          unless asked. Follow up once, about ten days later, and then stop.</li>
+      </ol>
+      </div>
+
+      <div>
+      <h2>3 &middot; Reading how a company is scaling</h2>
+      <p class="h2note" id="pitchStage"></p>
+      <dl class="stage">
+        <dt>Under 10</dt><dd>No functions yet &mdash; the founders still do everything. You are
+          pitching to fill the gap they feel most acutely. Breadth beats specialism here, and the
+          work is undefined by nature.</dd>
+        <dt>10&ndash;25</dt><dd>The first functional hires appear: someone owning go-to-market,
+          someone owning operations. If a function you know is missing from their team page, that
+          absence is your opening.</dd>
+        <dt>25&ndash;50</dt><dd>Process starts to break. Pricing, forecasting, hiring plans and
+          partnerships get real owners around here &mdash; the classic MBA entry points.</dd>
+        <dt>50+</dt><dd>Structure exists and roles get posted properly. These companies mostly
+          show up on the <b>Job board</b> tab instead.</dd>
+      </dl>
+      <p class="h2note" style="margin-top:12px;max-width:76ch">A shortcut: open their team page and
+        count <b>functions, not people</b>. A company with eight engineers and nobody owning
+        go-to-market is telling you exactly what it needs next.</p>
+      </div>
+
+      <div class="cta pfull">
+        <b>You may be able to bring your own funding.</b> Stern&rsquo;s
+        <a href="https://www.stern.nyu.edu/business-partnerships/build-your-brand/sternworks-serve-nyc"
+           target="_blank" rel="noopener">SternWorks program</a> supplements a student&rsquo;s
+        salary for a 10-week summer internship &mdash; up to $15,000 including minimum employer
+        compensation &mdash; for first-year full-time and dual-degree MBA students. Past projects
+        have covered strategy, marketing, business development, operations and financial
+        modelling. That is a strong opening line for a nine-person team with a real problem and no
+        headcount budget. Employers post opportunities via
+        <a href="mailto:sternworks@stern.nyu.edu">sternworks@stern.nyu.edu</a>.
+        Confirm the current eligibility rules with the Careers team before you offer it.
+      </div>
+
+      </div><!-- /pguide -->
+
+      <h2 style="margin-top:36px">4 &middot; The list</h2>
+      <p class="h2note">Sort by <b>Weeks Since Raise</b> to find the freshest money, or filter
+        <b>Climate Sector</b> to your area.</p>
       <div class="embed">
+        <!-- No ?v= on this URL, deliberately. That view id renders a BLANK iframe:
+             HTTP 200, Notion chrome, no rows, no error. Dropping the parameter
+             falls back to the default view, which renders. The job-board embed
+             keeps its ?v= because that view does work. Comment sits OUTSIDE the
+             tag -- an HTML comment inside a start tag parses as attributes. -->
         <iframe data-src="https://roasted-gondola-2df.notion.site/ebd/3b36c669575c8094a23fc4fc8516c90d"
-                <!-- No ?v= here on purpose. That view id renders a BLANK iframe --
-                     HTTP 200, Notion chrome, no rows, no error. Dropping it falls
-                     back to the default view, which renders. The job-board embed
-                     above keeps its ?v= because that view does work. -->
-                title="Pitch Yourself Companies — live Notion database" allowfullscreen loading="lazy"></iframe>
+                title="Pitch Yourself Companies — live Notion database"
+                allowfullscreen loading="lazy"></iframe>
       </div>
       <p class="h2note" style="margin-top:8px">
         <a href="https://roasted-gondola-2df.notion.site/3b36c669575c8094a23fc4fc8516c90d?v=3b36c669575c80fbbe47000cae3eacc9"
@@ -606,6 +713,37 @@ fetch("stats.json",{cache:"no-store"})
       : "unknown";
     document.getElementById("asof").textContent =
       `Live from Notion \u00b7 last refreshed ${gen}. Funding data covers deals through ${thru}.`;
+
+  /* Every number below is read from stats.json, never written into the page.
+     This copy is advice students act on, so it has to move with the board
+     rather than rot in the markup the way the original tiles did. */
+  const P = S.pitch || {};
+  const el_ = id => document.getElementById(id);
+  if(P.pool_count){
+    el_("pitchLede").innerHTML =
+      `<b>${P.pool_count.toLocaleString()} climate companies</b> raised money in the last `
+     +`${P.window_months} months and have <b>no job posted</b>. They are hiring-shaped but not `
+     +`hiring-visible, so nobody is competing with you for them. This page is how to approach one.`;
+    el_("pitchStats").innerHTML = [
+      [P.pool_count.toLocaleString(), "companies funded but not posting"],
+      [Math.round(P.posting_median_weeks) + " wks", "median lag from raise to first posted role"],
+      [P.posting_within_26w_pct + "%", "post within 6 months of raising &mdash; the rest take longer"],
+      [P.pool_median_headcount, "median headcount &mdash; you would be an early hire"],
+    ].map(([n_,c]) => `<div><div class="n">${n_}</div><div class="c">${c}</div></div>`).join("");
+    el_("pitchWhy").innerHTML =
+      `Hiring lags funding badly. Companies that eventually post a role do so a median `
+     +`<b>${Math.round(P.posting_median_weeks)} weeks</b> after their raise, and only `
+     +`<b>${P.posting_within_26w_pct}%</b> post within six months. The companies on this list sit `
+     +`a median <b>${Math.round(P.pool_median_weeks)} weeks</b> past their raise &mdash; `
+     +`<b>earlier</b> in that cycle than the typical company with an ad up. They have the money `
+     +`and the plan; they have not written the job description yet. That gap is the opportunity, `
+     +`and it closes the moment the ad goes live.`;
+    el_("pitchStage").innerHTML =
+      `Median headcount here is <b>${P.pool_median_headcount}</b> &mdash; `
+     +`${P.pool_under_20_pct}% are under 20 people and ${P.pool_under_50_pct}% under 50. At that `
+     +`size there is no org chart to read, so read the <b>gaps</b> instead. Headcount tells you `
+     +`which gap is open:`;
+  }
 
     buildTiles(S); buildLegend(); buildFunnel(); renderAll();
   })

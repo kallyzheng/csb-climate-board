@@ -113,6 +113,37 @@
   .stat .n{font-size:1.3rem;font-weight:660;font-variant-numeric:tabular-nums;
     color:var(--text-primary)}
   .stat .c{font-size:.7rem;color:var(--text-secondary);margin-top:3px;line-height:1.35}
+  /* Screenshot walkthrough. The images are dark-mode captures of Notion, so
+     they are framed rather than dropped straight onto the page -- on a light
+     background an unframed dark screenshot reads as a rendering fault. The
+     frame gives it an intentional edge in both themes. */
+  .shots{counter-reset:sh;list-style:none;padding:0;margin:14px 0 0;
+    display:grid;grid-template-columns:1fr;gap:26px}
+  /* Two columns, not three: step 1's capture is a 17:1 banner of the filter
+     bar, and in a third of the width its text renders ~5px. It spans instead,
+     leaving the two tall dropdown captures side by side beneath it. */
+  @media(min-width:1000px){
+    .shots{grid-template-columns:repeat(2,1fr);align-items:start}
+    .shots li:first-child{grid-column:1/-1}
+  }
+  .shots li{counter-increment:sh;position:relative;padding:0 0 0 32px}
+  .shots li::before{content:counter(sh);position:absolute;left:0;top:1px;width:21px;height:21px;
+    border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:.68rem;
+    font-weight:700;display:grid;place-items:center}
+  .shots p{font-size:.82rem;color:var(--text-secondary);margin:0 0 10px;line-height:1.5}
+  .shots b{color:var(--text-primary)}
+  .shots figure{margin:0;background:#191919;border:1px solid var(--border);border-radius:8px;
+    padding:7px;overflow:hidden}
+  /* max-height keeps the tall dropdown captures from running a full screen
+     each; width:auto with it stops them stretching out of proportion. */
+  .shots img{display:block;max-width:100%;max-height:620px;width:auto;height:auto;
+    margin:0 auto;border-radius:4px}
+  .faq{margin:12px 0 0;display:grid;grid-template-columns:1fr;gap:0}
+  @media(min-width:1000px){ .faq{grid-template-columns:repeat(3,1fr);gap:0 34px} }
+  .faq dt{font-size:.84rem;font-weight:660;color:var(--text-primary);margin:0 0 5px}
+  .faq dd{margin:0 0 20px;font-size:.82rem;color:var(--text-secondary);line-height:1.5}
+  .faq .faqfull{grid-column:1/-1;margin:4px 0 0;padding-top:14px;
+    border-top:1px solid var(--border)}
   .steps{counter-reset:st;list-style:none;padding:0;margin:6px 0 0}
   .steps li{counter-increment:st;position:relative;padding:0 0 0 32px;margin:0 0 14px;
     font-size:.82rem;color:var(--text-secondary);max-width:76ch;line-height:1.5}
@@ -252,6 +283,7 @@
 
   <div class="tabs" role="tablist" aria-label="Views">
     <button role="tab" id="tab-board"   aria-controls="panel-board"   aria-selected="true"  data-tab="board">Job board</button>
+    <button role="tab" id="tab-howto"   aria-controls="panel-howto"   aria-selected="false" data-tab="howto" tabindex="-1">How to use it</button>
     <button role="tab" id="tab-pitch"   aria-controls="panel-pitch"   aria-selected="false" data-tab="pitch" tabindex="-1">Pitch yourself</button>
     <button role="tab" id="tab-metrics" aria-controls="panel-metrics" aria-selected="false" data-tab="metrics" tabindex="-1">Metrics</button>
   </div>
@@ -261,7 +293,9 @@
   <!-- ───────── 0. LIVE BOARD ───────── -->
   <section>
     <h2>The live board</h2>
-    <p class="h2note">Filterable job database — climate sector, MBA function, seniority, location.</p>
+    <p class="lede" id="boardLede">Every open role we can find at a recently funded climate
+      startup, narrowed to the ones an MBA can actually apply for.</p>
+
     <div class="embed">
       <iframe src="https://roasted-gondola-2df.notion.site/ebd/d66b7d759b7c46f2866df434a810b67d?v=3486c669575c819dab4a000cbffa6e49"
               title="CSB climate job board — live Notion database" allowfullscreen></iframe>
@@ -269,10 +303,141 @@
     <p class="h2note" style="margin-top:8px">
       <a href="https://roasted-gondola-2df.notion.site/d66b7d759b7c46f2866df434a810b67d?v=3486c669575c819dab4a000cbffa6e49"
          target="_blank" rel="noopener">Open full board in Notion &#8599;</a>
+      &nbsp;&middot;&nbsp; First time here? <a href="#howto">How to use it &rarr;</a> explains the
+      filters and how to narrow this to the roles you want.
     </p>
   </section>
 
   </div><!-- /panel-board -->
+
+  <!-- ───────── 1. HOW TO USE ─────────
+       Split out of the board panel deliberately. The board is used repeatedly
+       and the guide is read once, so stacking them meant scrolling past a
+       620px iframe every time you wanted to re-check what a filter did. The
+       link above is the discovery path back. -->
+  <div role="tabpanel" id="panel-howto" aria-labelledby="tab-howto" tabindex="0" hidden>
+  <section>
+    <h2>How to use the board</h2>
+    <p class="lede" style="max-width:75ch">You do not need to know Notion. The table on the
+      <a href="#board">Job board</a> tab is already filtered for you &mdash; this page explains
+      what those filters did, what each column means, and how to narrow it down to the roles
+      you actually want.</p>
+
+    <div class="pguide">
+
+      <div>
+        <h2>1 &middot; What is already filtered</h2>
+        <p class="h2note">The blue chips along the top of the board are filters that are
+          always on. They are why you see hundreds of roles rather than thousands.</p>
+        <ul class="steps" id="boardFilters"></ul>
+      </div>
+
+      <div>
+        <h2>2 &middot; What each column means</h2>
+        <p class="h2note">Six columns are shown by default. Scroll the table sideways to reach
+          the rest.</p>
+        <ul class="steps">
+          <li><b>Job Title</b> &mdash; the company&rsquo;s own wording, not ours.</li>
+          <li><b>Company</b> &mdash; click it to open the company record: sector, funding,
+            headcount, careers page.</li>
+          <li><b>Description Summary</b> &mdash; a one-line summary of the posting, so you can
+            skim without opening every ad.</li>
+          <li><b>Job URL</b> &mdash; the actual application link. This is where you apply.</li>
+          <li><b>MBA Function</b> &mdash; which of our <span id="nFunctions">26</span> MBA
+            functions the role maps to (Marketing, Business Development, Product Management&hellip;).</li>
+          <li><b>Seniority</b> &mdash; Entry Level, Associate, Manager, Senior Manager&nbsp;/&nbsp;Director,
+            or VP+.</li>
+        </ul>
+        <p class="h2note">Fields named <i>Enrichment Evidence</i>, <i>Raw Job Text</i>,
+          <i>Needs Review</i>, <i>Verification Status</i>, <i>Job Source</i> and
+          <i>Posting Type</i> are how the pipeline audits itself. Ignore them.</p>
+      </div>
+
+      <div>
+        <h2>3 &middot; Narrowing it further</h2>
+        <p class="h2note">Six columns are visible, but you can filter on more than those.
+          Also stored on every role: <b>Location</b> and <b>Location Type</b>
+          (remote / hybrid / onsite), <b>Salary Range</b>, <b>Days Open</b>,
+          <b>Date Posted</b>, <b>Employment Type</b>, and <b>MBA Function Group</b> &mdash;
+          the seven broad families the <span id="nFunctions2">26</span> functions roll up
+          into, if you want &ldquo;anything in Sales &amp; Marketing&rdquo; rather than one
+          function.</p>
+        <p class="h2note">Sort with the <b>&#8645;</b> icon. The board arrives newest-first,
+          but <i>Days Open</i> is worth a look: a role open a long time is often one they are
+          struggling to fill.</p>
+        <p class="h2note"><b>You cannot break it.</b> Notion shows the note
+          <i>&ldquo;changes to filters &amp; sorts in this view are only visible to
+          you&rdquo;</i> &mdash; nothing you do changes the board for anyone else, and nothing
+          is saved. Experiment freely, then press <b>Reset</b>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Screenshots run full width, not inside the three columns. Cropped to the
+       one control each step names -- at column width the Notion UI text renders
+       around 5px and is useless, which defeats the point of showing it. -->
+  <section>
+    <h2>Filtering, step by step</h2>
+    <p class="h2note">Three clicks. This example narrows the board to Marketing roles.</p>
+    <ol class="shots">
+      <li>
+        <p>Click <b>+ Filter</b>, at the right-hand end of the row of blue filter chips.</p>
+        <figure>
+          <img src="howto-1-filter-button.png" alt="The row of filter chips on the board, with
+               the + Filter button at the right-hand end" width="1000" height="59" loading="lazy">
+        </figure>
+      </li>
+      <li>
+        <p>Pick the property to filter on. <b>MBA Function</b>, <b>Seniority</b> and
+          <b>Location Type</b> are the three worth knowing.</p>
+        <figure>
+          <img src="howto-2-pick-property.png" alt="The property list that appears, with MBA
+               Function highlighted" width="633" height="1010" loading="lazy">
+        </figure>
+      </li>
+      <li>
+        <p>Tick the values you want. Ticking several shows roles matching <b>any</b> of them,
+          so ticking Manager <i>and</i> Senior Manager widens the list rather than narrowing
+          it. Add a second filter to combine &mdash; Marketing <i>and</i> Associate-level gives
+          a much shorter, much more useful set.</p>
+        <figure>
+          <img src="howto-3-tick-values.png" alt="The MBA Function dropdown with Marketing
+               ticked, and the resulting filter chip above it" width="770" height="680"
+               loading="lazy">
+        </figure>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ───────── FAQ ───────── -->
+  <section>
+    <h2>Questions</h2>
+    <dl class="faq">
+      <dt>How often does this update?</dt>
+      <dd>The job side refreshes weekly &mdash; every listing is re-checked and closed roles
+        drop off. New companies come from a PitchBook pull run roughly twice a month, so a
+        startup that raised last week may take a fortnight to appear.</dd>
+
+      <dt>Why isn&rsquo;t a company I know about here?</dt>
+      <dd>Most likely one of three reasons: it hasn&rsquo;t raised recently enough to be in
+        scope, we haven&rsquo;t found its careers page yet, or it has one we can&rsquo;t read
+        automatically. Careers-page discovery is the hardest part of this pipeline and it is
+        not complete. A missing company is not a judgement about the company.</dd>
+
+      <dt>What does &ldquo;MBA Relevant&rdquo; actually mean?</dt>
+      <dd>A role an MBA could plausibly be hired into without a degree or licence the programme
+        doesn&rsquo;t provide. It is deliberately generous at the edges &mdash; it is there to
+        remove process engineers and lab scientists, not to judge whether you personally are a
+        fit. If a role looks interesting, apply regardless of what we labelled it.</dd>
+
+      <dd class="faqfull">Still stuck, or spotted something wrong? The classifications are
+        automated and they do get things wrong &mdash; tell CSB and we can correct the
+        underlying record.</dd>
+    </dl>
+  </section>
+
+  </div><!-- /panel-howto -->
 
   <div role="tabpanel" id="panel-pitch" aria-labelledby="tab-pitch" tabindex="0" hidden>
     <section>
@@ -719,6 +884,39 @@ fetch("stats.json",{cache:"no-store"})
      rather than rot in the markup the way the original tiles did. */
   const P = S.pitch || {};
   const el_ = id => document.getElementById(id);
+
+  /* Job-board guide. The narrowing is the whole point of the explanation, so
+     both ends of it come from the same stats.json the charts use -- a student
+     told "538 of 3,437" must see that 538 in the table below. */
+  {
+    const T2 = S.tiles || {}, act = T2.active_listings, mba = T2.mba_roles;
+    if(act && mba){
+      const cut = act - mba;
+      el_("boardLede").innerHTML =
+        `Every open role we can find at a recently funded climate startup, narrowed to the `
+       +`ones an MBA can actually apply for. The table below is <b>already filtered</b>: you `
+       +`are seeing <b>${mba.toLocaleString()}</b> roles out of `
+       +`<b>${act.toLocaleString()}</b> we currently track.`;
+      el_("boardFilters").innerHTML = [
+        [`<b>Is Active</b>`,
+         `the role was still on the company&rsquo;s own careers page the last time we checked. `
+        +`Closed and dead-link postings drop off automatically.`],
+        [`<b>MBA Relevant</b>`,
+         `by far the biggest cut &mdash; it removes <b>${cut.toLocaleString()}</b> roles. `
+        +`Process engineers, lab scientists, technicians and field crew are real jobs, they `
+        +`just need degrees and licences an MBA programme doesn&rsquo;t give you.`],
+        [`<b>Application Method: Direct Apply</b>`,
+         `the posting has a real application link. Roles you can only reach by emailing someone `
+        +`are handled on the <b>Pitch yourself</b> tab instead, where the advice is different.`],
+        [`<b>Sorted by Date First Seen</b>`,
+         `newest first, so the roles at the top are the ones we found most recently.`],
+      ].map(([t,d]) => `<li>${t} &mdash; ${d}</li>`).join("");
+    }
+    if(T2.n_mba_functions)
+      ["nFunctions","nFunctions2"].forEach(id=>{
+        const e=el_(id); if(e) e.textContent=T2.n_mba_functions; });
+  }
+
   if(P.pool_count){
     el_("pitchLede").innerHTML =
       `<b>${P.pool_count.toLocaleString()} climate companies</b> raised money in the last `

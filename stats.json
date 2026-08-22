@@ -5,45 +5,45 @@
   "fund_ytd": 14350.8,
   "companies_with_deals": 1081,
   "companies_tracked": 1801,
-  "active_listings": 3419,
-  "boards_with_active": 349,
-  "mba_roles": 538,
+  "active_listings": 3512,
+  "boards_with_active": 362,
+  "mba_roles": 796,
   "n_mba_functions": 26,
   "n_excluded_functions": 8,
   "n_tech_categories": 99,
   "n_sectors": 6,
   "categorized": 1796,
   "pct_categorized": 99.7,
-  "pct_high_conf": 88.8,
-  "high_conf": 2194,
-  "classified": 2471,
-  "unclassified": 948,
-  "pct_classified": 72.3,
-  "open_app_posts": 89,
+  "pct_high_conf": 87.9,
+  "high_conf": 3083,
+  "classified": 3508,
+  "unclassified": 4,
+  "pct_classified": 99.9,
+  "open_app_posts": 103,
   "email_cta_companies": 46,
   "open_app_companies": 25,
   "careers_located": 652,
-  "supported_ats": 278,
-  "named_unsupported_ats": 25,
+  "supported_ats": 286,
+  "named_unsupported_ats": 31,
   "top_unsupported_ats": [
    "Dover",
    "TriNet Hire",
    "UKG"
   ],
-  "custom_pages": 349,
+  "custom_pages": 335,
   "reachable_extra": 71
  },
  "pitch": {
   "window_months": 12,
-  "pool_count": 1071,
-  "pool_median_weeks": 27.1,
-  "posting_median_weeks": 31.1,
-  "posting_within_26w_pct": 41,
-  "pool_median_headcount": 9,
+  "pool_count": 1038,
+  "pool_median_weeks": 28.9,
+  "posting_median_weeks": 33.3,
+  "posting_within_26w_pct": 38,
+  "pool_median_headcount": 8,
   "pool_under_20_pct": 76,
   "pool_under_50_pct": 93
  },
- "generated_at": "2026-08-06T21:05:39+00:00",
+ "generated_at": "2026-08-22T06:46:05+00:00",
  "funding_through": "2026-07-28",
  "sectors": [
   "Electricity",
@@ -441,28 +441,28 @@
  },
  "jobs": {
   "Electricity": {
-   "mba": 220,
-   "non": 1279
+   "mba": 358,
+   "non": 1184
   },
   "Transportation": {
-   "mba": 88,
-   "non": 534
+   "mba": 112,
+   "non": 529
   },
   "Manufacturing": {
-   "mba": 73,
-   "non": 388
+   "mba": 96,
+   "non": 383
   },
   "Food/Ag & Nature": {
-   "mba": 54,
-   "non": 301
-  },
-  "Buildings": {
-   "mba": 86,
+   "mba": 77,
    "non": 285
   },
+  "Buildings": {
+   "mba": 103,
+   "non": 271
+  },
   "GHG Removal": {
-   "mba": 17,
-   "non": 93
+   "mba": 49,
+   "non": 64
   }
  },
  "funnel": [
@@ -480,20 +480,20 @@
   ],
   [
    "On a supported ATS",
-   278
+   286
   ],
   [
    "Active listings harvested",
-   3419
+   3512
   ],
   [
    "MBA-relevant roles",
-   538
+   796
   ]
  ],
  "_diagnostics": {
   "companies_scanned": 1801,
-  "jobs_scanned": 3732,
+  "jobs_scanned": 3883,
   "active_jobs_without_sector": 1
  }
 }

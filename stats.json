@@ -35,15 +35,15 @@
  },
  "pitch": {
   "window_months": 12,
-  "pool_count": 1034,
-  "pool_median_weeks": 28.9,
-  "posting_median_weeks": 33.3,
+  "pool_count": 1009,
+  "pool_median_weeks": 29.7,
+  "posting_median_weeks": 34.4,
   "posting_within_26w_pct": 39,
   "pool_median_headcount": 8,
   "pool_under_20_pct": 76,
   "pool_under_50_pct": 93
  },
- "generated_at": "2026-08-22T14:13:16+00:00",
+ "generated_at": "2026-08-31T01:02:13+00:00",
  "funding_through": "2026-07-28",
  "sectors": [
   "Electricity",

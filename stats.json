@@ -5,21 +5,21 @@
   "fund_ytd": 17248.8,
   "companies_with_deals": 1136,
   "companies_tracked": 1871,
-  "active_listings": 4218,
-  "boards_with_active": 406,
-  "mba_roles": 926,
+  "active_listings": 4269,
+  "boards_with_active": 407,
+  "mba_roles": 835,
   "n_mba_functions": 26,
   "n_excluded_functions": 8,
   "n_tech_categories": 99,
   "n_sectors": 6,
   "categorized": 1862,
   "pct_categorized": 99.5,
-  "pct_high_conf": 87.7,
-  "high_conf": 3692,
-  "classified": 4211,
-  "unclassified": 7,
-  "pct_classified": 99.8,
-  "open_app_posts": 112,
+  "pct_high_conf": 87.5,
+  "high_conf": 3396,
+  "classified": 3883,
+  "unclassified": 386,
+  "pct_classified": 91.0,
+  "open_app_posts": 111,
   "email_cta_companies": 44,
   "open_app_companies": 20,
   "careers_located": 705,
@@ -35,15 +35,15 @@
  },
  "pitch": {
   "window_months": 12,
-  "pool_count": 1013,
-  "pool_median_weeks": 27.7,
-  "posting_median_weeks": 32.9,
-  "posting_within_26w_pct": 40,
+  "pool_count": 995,
+  "pool_median_weeks": 28.4,
+  "posting_median_weeks": 33.9,
+  "posting_within_26w_pct": 39,
   "pool_median_headcount": 8,
   "pool_under_20_pct": 77,
-  "pool_under_50_pct": 94
+  "pool_under_50_pct": 93
  },
- "generated_at": "2026-09-09T17:04:56+00:00",
+ "generated_at": "2026-09-17T01:42:29+00:00",
  "funding_through": "2026-08-24",
  "sectors": [
   "Electricity",
@@ -452,28 +452,28 @@
  },
  "jobs": {
   "Electricity": {
-   "mba": 414,
-   "non": 1491
+   "mba": 370,
+   "non": 1542
   },
   "Transportation": {
-   "mba": 130,
-   "non": 631
+   "mba": 120,
+   "non": 651
   },
   "Manufacturing": {
-   "mba": 118,
-   "non": 464
+   "mba": 108,
+   "non": 494
   },
   "Food/Ag & Nature": {
-   "mba": 103,
-   "non": 346
+   "mba": 95,
+   "non": 363
   },
   "Buildings": {
-   "mba": 108,
-   "non": 292
+   "mba": 94,
+   "non": 310
   },
   "GHG Removal": {
-   "mba": 52,
-   "non": 65
+   "mba": 47,
+   "non": 71
   }
  },
  "funnel": [
@@ -495,16 +495,16 @@
   ],
   [
    "Active listings harvested",
-   4218
+   4269
   ],
   [
    "MBA-relevant roles",
-   926
+   835
   ]
  ],
  "_diagnostics": {
   "companies_scanned": 1871,
-  "jobs_scanned": 5733,
+  "jobs_scanned": 6118,
   "active_jobs_without_sector": 4
  }
 }

@@ -1,8 +1,8 @@
 {
  "tiles": {
-  "fund_all": 27287.7,
-  "fund_m6": 12899.1,
-  "fund_ytd": 19753.9,
+  "fund_all": 29233.1,
+  "fund_m6": 14844.5,
+  "fund_ytd": 21699.3,
   "companies_with_deals": 1277,
   "companies_tracked": 2103,
   "active_listings": 4487,
@@ -12,26 +12,26 @@
   "n_excluded_functions": 8,
   "n_tech_categories": 99,
   "n_sectors": 6,
-  "categorized": 1903,
-  "pct_categorized": 90.5,
+  "categorized": 2092,
+  "pct_categorized": 99.5,
   "pct_high_conf": 89.0,
   "high_conf": 2989,
   "classified": 3360,
   "unclassified": 1127,
   "pct_classified": 74.9,
   "open_app_posts": 105,
-  "email_cta_companies": 43,
-  "open_app_companies": 20,
-  "careers_located": 711,
-  "supported_ats": 314,
-  "named_unsupported_ats": 33,
+  "email_cta_companies": 50,
+  "open_app_companies": 21,
+  "careers_located": 759,
+  "supported_ats": 322,
+  "named_unsupported_ats": 34,
   "top_unsupported_ats": [
    "Dover",
    "TriNet Hire",
    "UKG"
   ],
-  "custom_pages": 364,
-  "reachable_extra": 63
+  "custom_pages": 403,
+  "reachable_extra": 71
  },
  "pitch": {
   "window_months": 12,
@@ -43,7 +43,7 @@
   "pool_under_20_pct": 77,
   "pool_under_50_pct": 92
  },
- "generated_at": "2026-11-05T19:58:33+00:00",
+ "generated_at": "2026-11-05T21:28:13+00:00",
  "funding_through": "2026-11-03",
  "sectors": [
   "Electricity",
@@ -197,7 +197,7 @@
    "GHG Removal": 3.2
   },
   "2026-07": {
-   "Electricity": 1575.9,
+   "Electricity": 1583.3,
    "Transportation": 434.8,
    "Manufacturing": 169.6,
    "Food/Ag & Nature": 94.9,
@@ -207,30 +207,30 @@
   "2026-08": {
    "Electricity": 1608.6,
    "Transportation": 1918.7,
-   "Manufacturing": 570.4,
-   "Food/Ag & Nature": 267.8,
-   "Buildings": 89.5,
+   "Manufacturing": 570.6,
+   "Food/Ag & Nature": 269.9,
+   "Buildings": 151.6,
    "GHG Removal": 9.5
   },
   "2026-09": {
-   "Electricity": 1245.5,
-   "Transportation": 254.7,
-   "Manufacturing": 395.2,
-   "Food/Ag & Nature": 131.3,
-   "Buildings": 123.6,
-   "GHG Removal": 5.0
+   "Electricity": 1396.6,
+   "Transportation": 277.6,
+   "Manufacturing": 481.5,
+   "Food/Ag & Nature": 137.5,
+   "Buildings": 233.4,
+   "GHG Removal": 5.5
   },
   "2026-10": {
-   "Electricity": 879.5,
-   "Transportation": 431.4,
-   "Manufacturing": 105.9,
-   "Food/Ag & Nature": 18.2,
-   "Buildings": 23.4,
-   "GHG Removal": 7.5
+   "Electricity": 1808.8,
+   "Transportation": 664.0,
+   "Manufacturing": 322.0,
+   "Food/Ag & Nature": 95.6,
+   "Buildings": 37.8,
+   "GHG Removal": 9.5
   },
   "2026-11": {
    "Electricity": 0,
-   "Transportation": 0,
+   "Transportation": 25.0,
    "Manufacturing": 0,
    "Food/Ag & Nature": 2.5,
    "Buildings": 0,
@@ -289,197 +289,197 @@
  },
  "sector_totals": {
   "Electricity": {
-   "all": 11031.2,
-   "m6": 6305.6,
-   "ytd": 8813.9,
-   "n": 449
+   "all": 12119.0,
+   "m6": 7393.4,
+   "ytd": 9901.7,
+   "n": 502
   },
   "Transportation": {
-   "all": 6001.3,
-   "m6": 3280.5,
-   "ytd": 4775.8,
-   "n": 337
+   "all": 6281.8,
+   "m6": 3561.0,
+   "ytd": 5056.3,
+   "n": 368
   },
   "Manufacturing": {
-   "all": 4863.1,
-   "m6": 2265.5,
-   "ytd": 4010.0,
-   "n": 457
+   "all": 5165.7,
+   "m6": 2568.1,
+   "ytd": 4312.6,
+   "n": 499
   },
   "Food/Ag & Nature": {
-   "all": 3300.7,
-   "m6": 571.7,
-   "ytd": 1153.3,
-   "n": 348
+   "all": 3386.4,
+   "m6": 657.4,
+   "ytd": 1239.0,
+   "n": 372
   },
   "Buildings": {
-   "all": 1574.6,
-   "m6": 395.9,
-   "ytd": 757.4,
-   "n": 204
+   "all": 1760.9,
+   "m6": 582.2,
+   "ytd": 943.7,
+   "n": 234
   },
   "GHG Removal": {
-   "all": 516.8,
-   "m6": 79.9,
-   "ytd": 243.5,
-   "n": 108
+   "all": 519.3,
+   "m6": 82.4,
+   "ytd": 246.0,
+   "n": 117
   }
  },
  "sector_stats": {
   "Electricity": {
    "all": {
-    "total": 11031.2,
-    "companies": 449,
-    "disclosed": 295,
-    "median": 4.3,
-    "mean": 37.4,
-    "share": 40.4
+    "total": 12119.0,
+    "companies": 502,
+    "disclosed": 328,
+    "median": 4.1,
+    "mean": 36.9,
+    "share": 41.5
    },
    "m6": {
-    "total": 6305.7,
-    "companies": 154,
-    "disclosed": 106,
-    "median": 7.0,
-    "mean": 59.5,
-    "share": 48.9
+    "total": 7393.4,
+    "companies": 207,
+    "disclosed": 139,
+    "median": 6,
+    "mean": 53.2,
+    "share": 49.8
    },
    "ytd": {
-    "total": 8814.1,
-    "companies": 275,
-    "disclosed": 192,
-    "median": 5.6,
-    "mean": 45.9,
-    "share": 44.6
+    "total": 9901.8,
+    "companies": 328,
+    "disclosed": 225,
+    "median": 5.2,
+    "mean": 44.0,
+    "share": 45.6
    }
   },
   "Transportation": {
    "all": {
-    "total": 6001.3,
-    "companies": 337,
-    "disclosed": 222,
-    "median": 3.3,
-    "mean": 27.0,
-    "share": 22.0
+    "total": 6281.7,
+    "companies": 368,
+    "disclosed": 234,
+    "median": 3.5,
+    "mean": 26.8,
+    "share": 21.5
    },
    "m6": {
-    "total": 3280.5,
-    "companies": 75,
-    "disclosed": 57,
+    "total": 3560.9,
+    "companies": 106,
+    "disclosed": 69,
     "median": 9,
-    "mean": 57.6,
-    "share": 25.4
+    "mean": 51.6,
+    "share": 24.0
    },
    "ytd": {
-    "total": 4775.8,
-    "companies": 169,
-    "disclosed": 121,
-    "median": 4.9,
-    "mean": 39.5,
-    "share": 24.2
+    "total": 5056.3,
+    "companies": 200,
+    "disclosed": 133,
+    "median": 5,
+    "mean": 38.0,
+    "share": 23.3
    }
   },
   "Manufacturing": {
    "all": {
-    "total": 4862.9,
-    "companies": 457,
-    "disclosed": 288,
+    "total": 5165.4,
+    "companies": 499,
+    "disclosed": 310,
     "median": 2.4,
-    "mean": 16.9,
-    "share": 17.8
+    "mean": 16.7,
+    "share": 17.7
    },
    "m6": {
-    "total": 2265.5,
-    "companies": 135,
-    "disclosed": 100,
-    "median": 3.5,
-    "mean": 22.7,
-    "share": 17.6
+    "total": 2568.0,
+    "companies": 177,
+    "disclosed": 122,
+    "median": 3.2,
+    "mean": 21.0,
+    "share": 17.3
    },
    "ytd": {
-    "total": 4009.9,
-    "companies": 259,
-    "disclosed": 177,
-    "median": 3.0,
-    "mean": 22.7,
-    "share": 20.3
+    "total": 4312.5,
+    "companies": 301,
+    "disclosed": 199,
+    "median": 3,
+    "mean": 21.7,
+    "share": 19.9
    }
   },
   "Food/Ag & Nature": {
    "all": {
-    "total": 3300.8,
-    "companies": 348,
-    "disclosed": 191,
+    "total": 3386.5,
+    "companies": 372,
+    "disclosed": 203,
     "median": 2.2,
-    "mean": 17.3,
-    "share": 12.1
+    "mean": 16.7,
+    "share": 11.6
    },
    "m6": {
-    "total": 571.6,
-    "companies": 74,
-    "disclosed": 38,
-    "median": 2.4,
-    "mean": 15.0,
+    "total": 657.3,
+    "companies": 98,
+    "disclosed": 50,
+    "median": 2.3,
+    "mean": 13.1,
     "share": 4.4
    },
    "ytd": {
-    "total": 1153.3,
-    "companies": 162,
-    "disclosed": 91,
-    "median": 1,
-    "mean": 12.7,
-    "share": 5.8
+    "total": 1239.0,
+    "companies": 186,
+    "disclosed": 103,
+    "median": 1.2,
+    "mean": 12.0,
+    "share": 5.7
    }
   },
   "Buildings": {
    "all": {
-    "total": 1574.4,
-    "companies": 204,
-    "disclosed": 122,
-    "median": 4.7,
-    "mean": 12.9,
-    "share": 5.8
+    "total": 1760.7,
+    "companies": 234,
+    "disclosed": 139,
+    "median": 4.3,
+    "mean": 12.7,
+    "share": 6.0
    },
    "m6": {
-    "total": 395.9,
-    "companies": 50,
-    "disclosed": 37,
-    "median": 6.4,
-    "mean": 10.7,
-    "share": 3.1
+    "total": 582.2,
+    "companies": 80,
+    "disclosed": 54,
+    "median": 4.7,
+    "mean": 10.8,
+    "share": 3.9
    },
    "ytd": {
-    "total": 757.3,
-    "companies": 101,
-    "disclosed": 61,
-    "median": 7,
-    "mean": 12.4,
-    "share": 3.8
+    "total": 943.5,
+    "companies": 131,
+    "disclosed": 78,
+    "median": 6.5,
+    "mean": 12.1,
+    "share": 4.3
    }
   },
   "GHG Removal": {
    "all": {
-    "total": 516.8,
-    "companies": 108,
-    "disclosed": 51,
-    "median": 3,
-    "mean": 10.1,
-    "share": 1.9
+    "total": 519.2,
+    "companies": 117,
+    "disclosed": 54,
+    "median": 2.6,
+    "mean": 9.6,
+    "share": 1.8
    },
    "m6": {
-    "total": 79.9,
-    "companies": 17,
-    "disclosed": 8,
-    "median": 3.3,
-    "mean": 10.0,
+    "total": 82.4,
+    "companies": 26,
+    "disclosed": 11,
+    "median": 1.3,
+    "mean": 7.5,
     "share": 0.6
    },
    "ytd": {
-    "total": 243.6,
-    "companies": 47,
-    "disclosed": 21,
-    "median": 7.5,
-    "mean": 11.6,
-    "share": 1.2
+    "total": 246.0,
+    "companies": 56,
+    "disclosed": 24,
+    "median": 4.0,
+    "mean": 10.3,
+    "share": 1.1
    }
   }
  },
@@ -516,15 +516,15 @@
   ],
   [
    "Climate-categorized",
-   1903
+   2092
   ],
   [
    "Careers page located",
-   711
+   759
   ],
   [
    "On a supported ATS",
-   314
+   322
   ],
   [
    "Active listings harvested",

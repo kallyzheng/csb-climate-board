@@ -302,9 +302,738 @@
     <img class="lockup lockup-green" src="nyugreen-lockup-light.png" width="2083" height="307"
          alt="NYU Green">
   </div>
-  <h1>CSB Climate Job Board has moved to a new location</h1>
+  <h1>CSB Climate Job Board</h1>
+  <p class="sub">Automated pipeline: PitchBook company universe → climate-tech classification → careers-page discovery → job harvesting → MBA relevance classification.</p>
       <div class="brandrule"></div>
+
+  <div class="tabs" role="tablist" aria-label="Views">
+    <button role="tab" id="tab-board"   aria-controls="panel-board"   aria-selected="true"  data-tab="board">Job board</button>
+    <button role="tab" id="tab-howto"   aria-controls="panel-howto"   aria-selected="false" data-tab="howto" tabindex="-1">How to use it</button>
+    <button role="tab" id="tab-pitch"   aria-controls="panel-pitch"   aria-selected="false" data-tab="pitch" tabindex="-1">Pitch yourself</button>
+    <button role="tab" id="tab-metrics" aria-controls="panel-metrics" aria-selected="false" data-tab="metrics" tabindex="-1">Metrics</button>
+  </div>
+
+  <div role="tabpanel" id="panel-board" aria-labelledby="tab-board" tabindex="0">
+
+  <!-- ───────── 0. LIVE BOARD ───────── -->
+  <section>
+    <h2>The live board</h2>
+    <p class="lede" id="boardLede">Every open role we can find at a recently funded climate
+      startup, narrowed to the ones an MBA can actually apply for.</p>
+
+    <div class="embed">
+      <iframe src="https://roasted-gondola-2df.notion.site/ebd/d66b7d759b7c46f2866df434a810b67d?v=3486c669575c819dab4a000cbffa6e49"
+              title="CSB climate job board — live Notion database" allowfullscreen></iframe>
+    </div>
+    <p class="h2note" style="margin-top:8px">
+      <a href="https://roasted-gondola-2df.notion.site/d66b7d759b7c46f2866df434a810b67d?v=3486c669575c819dab4a000cbffa6e49"
+         target="_blank" rel="noopener">Open full board in Notion &#8599;</a>
+      &nbsp;&middot;&nbsp; First time here? <a href="#howto">How to use it &rarr;</a> explains the
+      filters and how to narrow this to the roles you want.
+    </p>
+  </section>
+
+  </div><!-- /panel-board -->
+
+  <!-- ───────── 1. HOW TO USE ─────────
+       Split out of the board panel deliberately. The board is used repeatedly
+       and the guide is read once, so stacking them meant scrolling past a
+       620px iframe every time you wanted to re-check what a filter did. The
+       link above is the discovery path back. -->
+  <div role="tabpanel" id="panel-howto" aria-labelledby="tab-howto" tabindex="0" hidden>
+  <section>
+    <h2>How to use the board</h2>
+    <p class="lede" style="max-width:75ch">You do not need to know Notion. The table on the
+      <a href="#board">Job board</a> tab is already filtered for you &mdash; this page explains
+      what those filters did, what each column means, and how to narrow it down to the roles
+      you actually want.</p>
+
+    <div class="pguide">
+
+      <div>
+        <h2>1 &middot; What is already filtered</h2>
+        <p class="h2note">The blue chips along the top of the board are filters that are
+          always on. They are why you see hundreds of roles rather than thousands.</p>
+        <ul class="steps" id="boardFilters"></ul>
+      </div>
+
+      <div>
+        <h2>2 &middot; What each column means</h2>
+        <p class="h2note">Six columns are shown by default. Scroll the table sideways to reach
+          the rest.</p>
+        <ul class="steps">
+          <li><b>Job Title</b> &mdash; the company&rsquo;s own wording, not ours.</li>
+          <li><b>Company</b> &mdash; click it to open the company record: sector, funding,
+            headcount, careers page.</li>
+          <li><b>Description Summary</b> &mdash; a one-line summary of the posting, so you can
+            skim without opening every ad.</li>
+          <li><b>Job URL</b> &mdash; the actual application link. This is where you apply.</li>
+          <li><b>MBA Function</b> &mdash; which of our <span id="nFunctions">26</span> MBA
+            functions the role maps to (Marketing, Business Development, Product Management&hellip;).</li>
+          <li><b>Seniority</b> &mdash; Entry Level, Associate, Manager, Senior Manager&nbsp;/&nbsp;Director,
+            or VP+.</li>
+        </ul>
+        <p class="h2note">Fields named <i>Enrichment Evidence</i>, <i>Raw Job Text</i>,
+          <i>Needs Review</i>, <i>Verification Status</i>, <i>Job Source</i> and
+          <i>Posting Type</i> are how the pipeline audits itself. Ignore them.</p>
+      </div>
+
+      <div>
+        <h2>3 &middot; Narrowing it further</h2>
+        <p class="h2note">Six columns are visible, but you can filter on more than those.
+          Also stored on every role: <b>Location</b> and <b>Location Type</b>
+          (remote / hybrid / onsite), <b>Salary Range</b>, <b>Days Open</b>,
+          <b>Date Posted</b>, <b>Employment Type</b>, and <b>MBA Function Group</b> &mdash;
+          the seven broad families the <span id="nFunctions2">26</span> functions roll up
+          into, if you want &ldquo;anything in Sales &amp; Marketing&rdquo; rather than one
+          function.</p>
+        <p class="h2note">Sort with the <b>&#8645;</b> icon. The board arrives newest-first,
+          but <i>Days Open</i> is worth a look: a role open a long time is often one they are
+          struggling to fill.</p>
+        <p class="h2note"><b>You cannot break it.</b> Notion shows the note
+          <i>&ldquo;changes to filters &amp; sorts in this view are only visible to
+          you&rdquo;</i> &mdash; nothing you do changes the board for anyone else, and nothing
+          is saved. Experiment freely, then press <b>Reset</b>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Screenshots run full width, not inside the three columns. Cropped to the
+       one control each step names -- at column width the Notion UI text renders
+       around 5px and is useless, which defeats the point of showing it. -->
+  <section>
+    <h2>Filtering, step by step</h2>
+    <p class="h2note">Three clicks. This example narrows the board to Marketing roles.</p>
+    <ol class="shots">
+      <li>
+        <p>Click <b>+ Filter</b>, at the right-hand end of the row of blue filter chips.</p>
+        <figure>
+          <img src="howto-1-filter-button.png" alt="The row of filter chips on the board, with
+               the + Filter button at the right-hand end" width="1000" height="59" loading="lazy">
+        </figure>
+      </li>
+      <li>
+        <p>Pick the property to filter on. <b>MBA Function</b>, <b>Seniority</b> and
+          <b>Location Type</b> are the three worth knowing.</p>
+        <figure>
+          <img src="howto-2-pick-property.png" alt="The property list that appears, with MBA
+               Function highlighted" width="633" height="1010" loading="lazy">
+        </figure>
+      </li>
+      <li>
+        <p>Tick the values you want. Ticking several shows roles matching <b>any</b> of them,
+          so ticking Manager <i>and</i> Senior Manager widens the list rather than narrowing
+          it. Add a second filter to combine &mdash; Marketing <i>and</i> Associate-level gives
+          a much shorter, much more useful set.</p>
+        <figure>
+          <img src="howto-3-tick-values.png" alt="The MBA Function dropdown with Marketing
+               ticked, and the resulting filter chip above it" width="770" height="680"
+               loading="lazy">
+        </figure>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ───────── FAQ ───────── -->
+  <section>
+    <h2>Questions</h2>
+    <dl class="faq">
+      <dt>How often does this update?</dt>
+      <dd>The job side refreshes weekly &mdash; every listing is re-checked and closed roles
+        drop off. New companies come from a PitchBook pull run roughly twice a month, so a
+        startup that raised last week may take a fortnight to appear.</dd>
+
+      <dt>Why isn&rsquo;t a company I know about here?</dt>
+      <dd>Most likely one of three reasons: it hasn&rsquo;t raised recently enough to be in
+        scope, we haven&rsquo;t found its careers page yet, or it has one we can&rsquo;t read
+        automatically. Careers-page discovery is the hardest part of this pipeline and it is
+        not complete. A missing company is not a judgement about the company.</dd>
+
+      <dt>What does &ldquo;MBA Relevant&rdquo; actually mean?</dt>
+      <dd>A role an MBA could plausibly be hired into without a degree or licence the programme
+        doesn&rsquo;t provide. It is deliberately generous at the edges &mdash; it is there to
+        remove process engineers and lab scientists, not to judge whether you personally are a
+        fit. If a role looks interesting, apply regardless of what we labelled it.</dd>
+
+      <dd class="faqfull">Still stuck, or spotted something wrong? The classifications are
+        automated and they do get things wrong &mdash; tell CSB and we can correct the
+        underlying record.</dd>
+    </dl>
+  </section>
+
+  </div><!-- /panel-howto -->
+
+  <div role="tabpanel" id="panel-pitch" aria-labelledby="tab-pitch" tabindex="0" hidden>
+    <section>
+      <h2>Pitch yourself &mdash; how to reach a startup with no job ad</h2>
+      <div class="phead">
+        <p class="lede" id="pitchLede"></p>
+        <div class="stat" id="pitchStats"></div>
+      </div>
+
+      <div class="pguide">
+
+      <div>
+      <h2>1 &middot; Why this works</h2>
+      <p class="h2note" id="pitchWhy"></p>
+      </div>
+
+      <div>
+      <h2>2 &middot; How to do it</h2>
+      <ol class="steps">
+        <li><b>Pick a company, not a posting.</b> There is nothing to apply to &mdash; that is the
+          advantage. You arrive before the ad exists, and before it draws hundreds of applicants.</li>
+        <li><b>Use the Pitch Route column.</b> <b>Cold Email</b> means a real address and no form.
+          <b>Open Application</b> means the company has explicitly invited exactly this, so start
+          there if you are new to cold outreach.</li>
+        <li><b>Lead with the work, not your CV.</b> Name one problem you would own in the first
+          ninety days &mdash; a pricing analysis, a channel test, a supplier comparison &mdash; and
+          why it matters at their size. &ldquo;Do you have any openings?&rdquo; gets nothing;
+          &ldquo;here is the gap I think you have, and how I would close it&rdquo; gets a reply.</li>
+        <li><b>Show you did the reading.</b> Reference their raise, their product, their market.
+          The Notion row gives you sector, headcount, total raised and weeks since raise before
+          you have opened a single tab.</li>
+        <li><b>Keep it to five sentences and one ask.</b> Suggest a 20-minute call. Attach nothing
+          unless asked. Follow up once, about ten days later, and then stop.</li>
+      </ol>
+      </div>
+
+      <div>
+      <h2>3 &middot; Reading how a company is scaling</h2>
+      <p class="h2note" id="pitchStage"></p>
+      <dl class="stage">
+        <dt>Under 10</dt><dd>No functions yet &mdash; the founders still do everything. You are
+          pitching to fill the gap they feel most acutely. Breadth beats specialism here, and the
+          work is undefined by nature.</dd>
+        <dt>10&ndash;25</dt><dd>The first functional hires appear: someone owning go-to-market,
+          someone owning operations. If a function you know is missing from their team page, that
+          absence is your opening.</dd>
+        <dt>25&ndash;50</dt><dd>Process starts to break. Pricing, forecasting, hiring plans and
+          partnerships get real owners around here &mdash; the classic MBA entry points.</dd>
+        <dt>50+</dt><dd>Structure exists and roles get posted properly. These companies mostly
+          show up on the <b>Job board</b> tab instead.</dd>
+      </dl>
+      <p class="h2note" style="margin-top:12px;max-width:76ch">A shortcut: open their team page and
+        count <b>functions, not people</b>. A company with eight engineers and nobody owning
+        go-to-market is telling you exactly what it needs next.</p>
+      </div>
+
+      <div class="cta pfull">
+        <b>You may be able to bring your own funding.</b> Stern&rsquo;s
+        <a href="https://www.stern.nyu.edu/business-partnerships/build-your-brand/sternworks-serve-nyc"
+           target="_blank" rel="noopener">SternWorks program</a> supplements a student&rsquo;s
+        salary for a 10-week summer internship &mdash; up to $15,000 including minimum employer
+        compensation &mdash; for first-year full-time and dual-degree MBA students. Past projects
+        have covered strategy, marketing, business development, operations and financial
+        modelling. That is a strong opening line for a nine-person team with a real problem and no
+        headcount budget. Employers post opportunities via
+        <a href="mailto:sternworks@stern.nyu.edu">sternworks@stern.nyu.edu</a>.
+        Confirm the current eligibility rules with the Careers team before you offer it.
+      </div>
+
+      </div><!-- /pguide -->
+
+      <h2 style="margin-top:36px">4 &middot; The list</h2>
+      <p class="h2note">Sort by <b>Weeks Since Raise</b> to find the freshest money, or filter
+        <b>Climate Sector</b> to your area.</p>
+      <div class="embed">
+        <!-- No ?v= on this URL, deliberately. That view id renders a BLANK iframe:
+             HTTP 200, Notion chrome, no rows, no error. Dropping the parameter
+             falls back to the default view, which renders. The job-board embed
+             keeps its ?v= because that view does work. Comment sits OUTSIDE the
+             tag -- an HTML comment inside a start tag parses as attributes. -->
+        <iframe data-src="https://roasted-gondola-2df.notion.site/ebd/3b36c669575c8094a23fc4fc8516c90d"
+                title="Pitch Yourself Companies — live Notion database"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="h2note" style="margin-top:8px">
+        <a href="https://roasted-gondola-2df.notion.site/3b36c669575c8094a23fc4fc8516c90d?v=3b36c669575c80fbbe47000cae3eacc9"
+           target="_blank" rel="noopener">Open full list in Notion &#8599;</a>
+      </p>
+    </section>
+  </div><!-- /panel-pitch -->
+
+  <div role="tabpanel" id="panel-metrics" aria-labelledby="tab-metrics" tabindex="0" hidden>
+    <p class="asof" id="asof"></p>
+
+
+  <!-- ───────── 1. FUNDING ───────── -->
+  <section>
+    <h2>1 · Capital flowing into climate tech</h2>
+    <p class="h2note">Disclosed deal value for tracked companies, by climate sector.</p>
+
+    <div class="tiles">
+      <div class="tile"><div class="v" id="tFundAll">&mdash;</div><div class="l">Total tracked funding</div><div class="d" id="tFundAllD"></div></div>
+      <div class="tile"><div class="v" id="tFundM6">&mdash;</div><div class="l">Last 6 months</div><div class="d" id="tFundM6D"></div></div>
+      <div class="tile"><div class="v" id="tFundYtd">&mdash;</div><div class="l">Year to date</div><div class="d" id="tFundYtdD"></div></div>
+      <div class="tile"><div class="v" id="tCoDeals">&mdash;</div><div class="l">Companies with disclosed deals</div><div class="d" id="tCoDealsD"></div></div>
+    </div>
+
+    <div class="ctl" role="group" aria-label="Funding time range">
+      <span class="lbl">Range</span>
+      <button data-range="all" aria-pressed="true" id="btnAll">All months</button>
+      <button data-range="m6" aria-pressed="false">Last 6 months</button>
+      <button data-range="ytd" aria-pressed="false" id="btnYtd">YTD</button>
+    </div>
+
+    <div class="chart"><svg id="fundChart" viewBox="0 0 940 300" role="img"
+      aria-label="Monthly disclosed funding by climate sector, stacked bars"></svg></div>
+    <div class="legend" id="fundLegend"></div>
+
+    <h2 style="margin-top:30px">Funding by sector</h2>
+    <p class="h2note" id="sectorNote">All 13 months</p>
+    <div class="pies">
+      <figure class="pie">
+        <figcaption>Share of capital</figcaption>
+        <div class="den">of total disclosed $ — skewed by a few very large rounds</div>
+        <svg id="pieMoney" role="img" aria-label="Share of disclosed funding by sector"></svg>
+        <ul class="plg" id="legMoney"></ul>
+      </figure>
+      <figure class="pie">
+        <figcaption>Share of companies raising</figcaption>
+        <div class="den">of all companies with a qualifying deal — tracks hiring better</div>
+        <svg id="pieCos" role="img" aria-label="Share of companies raising by sector"></svg>
+        <ul class="plg" id="legCos"></ul>
+      </figure>
+    </div>
+
+    <details>
+      <summary>Table view — funding by sector</summary>
+      <p class="h2note" id="fundTableNote" style="margin:6px 0 0"></p>
+      <table><thead><tr><th>Sector</th><th>Total ($M)</th><th>% of $</th><th>Companies raising</th><th>% of companies</th><th>Median ticket ($M)</th><th>Avg ticket ($M)</th><th>% disclosed</th></tr></thead>
+        <tbody id="fundTable"></tbody></table>
+    </details>
+  </section>
+
+  <!-- ───────── 2. JOBS ───────── -->
+  <section>
+    <h2>2 · Jobs harvested, by sector and MBA relevance</h2>
+    <p class="h2note">Every active listing is classified into an MBA function taxonomy; roles requiring engineering, science, trade or clinical backgrounds are filtered off the student board.</p>
+
+    <div class="tiles">
+      <div class="tile"><div class="v" id="tActive">&mdash;</div><div class="l">Active job listings</div><div class="d" id="tActiveD"></div></div>
+      <div class="tile"><div class="v" id="tMba">&mdash;</div><div class="l">MBA-relevant roles</div><div class="d">the student-facing board</div></div>
+      <div class="tile"><div class="v" id="tFns">&mdash;</div><div class="l">MBA job functions</div><div class="d" id="tFnsD"></div></div>
+      <div class="tile"><div class="v" id="tCats">&mdash;</div><div class="l">Climate tech categories</div><div class="d" id="tCatsD"></div></div>
+    </div>
+
+    <div class="chart"><svg id="jobChart" viewBox="0 0 940 250" role="img"
+      aria-label="Active jobs by climate sector, split into MBA-relevant and not MBA-relevant"></svg></div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--accent)"></i> MBA-relevant</span>
+      <span><i class="sw" style="background:var(--neutral)"></i> Not MBA-relevant (engineering, science, trades)</span>
+    </div>
+
+    <details>
+      <summary>Table view — jobs by sector</summary>
+      <table><thead><tr><th>Sector</th><th>MBA-relevant</th><th>Not MBA</th><th>Total</th><th>% MBA</th></tr></thead>
+        <tbody id="jobTable"></tbody></table>
+    </details>
+  </section>
+
+  <!-- ───────── 3. PIPELINE ───────── -->
+  <section>
+    <h2>3 · Pipeline coverage &amp; data quality</h2>
+    <p class="h2note">How far the automated pipeline carries a company from raw PitchBook record to a filterable job listing.</p>
+
+    <div class="funnel" id="funnel"></div>
+
+    <div class="tiles" style="margin-top:24px">
+      <div class="tile"><div class="v" id="tPctCat">&mdash;</div><div class="l">Companies auto-categorized</div><div class="d" id="tPctCatD"></div></div>
+      <div class="tile"><div class="v" id="tPctConf">&mdash;</div><div class="l">High-confidence classifications</div><div class="d" id="tPctConfD"></div></div>
+      <div class="tile"><div class="v" id="tPctClass">&mdash;</div><div class="l">Listings classified</div><div class="d" id="tPctClassD"></div></div>
+      <div class="tile"><div class="v" id="tOpenApp">&mdash;</div><div class="l">Open-application posts</div><div class="d">flagged, not shown as roles</div></div>
+    </div>
+
+    <div class="note">
+      <b>Reach beyond posted roles.</b> <span id="pEmail">&mdash;</span> companies publish only an “email us your résumé” contact and <span id="pOpen">&mdash;</span> accept open applications with no discrete listings — <span id="pReach">&mdash;</span> additional employers reachable through a separate general-application track rather than a job feed.
+      </div>
+    <div class="note">
+      <b>Known coverage gap.</b> <span id="pCareers">&mdash;</span> companies have a careers page; <span id="pAts">&mdash;</span> sit on ATS platforms the harvester supports today. A further <span id="pUnsup">&mdash;</span> are on identified but not-yet-integrated platforms (<span id="pUnsupList">&mdash;</span> and others), and <span id="pCustom">&mdash;</span> use custom pages requiring HTML extraction — the next expansion targets.
+      </div>
+  </section>
+  </div><!-- /panel-metrics -->
 </div>
+
+<script>
+let SECTORS=[], MONTHLY={}, SECTOR_TOTALS={}, SECTOR_STATS={}, JOBS={}, RANGES={}, RANGE_LABEL={}, FUNNEL=[];
+const SC = ["--s1","--s2","--s3","--s4","--s5","--s6"];
+const cv = n => getComputedStyle(document.querySelector(".viz-root")).getPropertyValue(n).trim();
+const NS = "http://www.w3.org/2000/svg";
+/* Charts draw at their container's real pixel width, so the 10-11.5px SVG
+   labels render at true size instead of being scaled up with the viewBox. */
+const chartW = svg => Math.max(640,
+  Math.round(svg.parentNode.getBoundingClientRect().width) || 940);
+const el = (t,a={})=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const money = v => v>=1000 ? "$"+(v/1000).toFixed(1)+"B" : "$"+Math.round(v)+"M";
+const short = s => ({"Food/Ag & Nature":"Food/Ag","GHG Removal":"GHG Rem."})[s]||s;
+
+function buildTiles(S){
+  const T=S.tiles, set=(id,v)=>{const e=document.getElementById(id); if(e) e.textContent=v;};
+  const num=v=>Number(v).toLocaleString();
+  const span=k=>{const r=S.ranges[k]; if(!r||!r.length) return "no data";
+    const f=m=>{const[y,mm]=m.split("-");
+      return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+mm-1]+" "+y;};
+    return r.length===1?f(r[0]):f(r[0])+" – "+f(r[r.length-1]);};
+
+  set("tFundAll",money(T.fund_all));  set("tFundAllD",span("all"));
+  set("tFundM6", money(T.fund_m6));   set("tFundM6D", span("m6"));
+  set("tFundYtd",money(T.fund_ytd));  set("tFundYtdD",span("ytd"));
+  set("tCoDeals",num(T.companies_with_deals));
+  set("tCoDealsD",`of ${num(T.companies_tracked)} tracked`);
+
+  set("tActive",num(T.active_listings));
+  set("tActiveD",`across ${num(T.boards_with_active)} company boards`);
+  set("tMba",num(T.mba_roles));
+  set("tFns",num(T.n_mba_functions));
+  set("tFnsD",`+ ${T.n_excluded_functions} excluded categories`);
+  set("tCats",num(T.n_tech_categories));
+  set("tCatsD",`across ${T.n_sectors} sectors`);
+
+  set("tPctCat",T.pct_categorized+"%");
+  set("tPctCatD",`${num(T.categorized)} of ${num(T.companies_tracked)}`);
+  set("tPctConf",Math.round(T.pct_high_conf)+"%");
+  set("tPctConfD",`${num(T.high_conf)} of ${num(T.classified)} · two-pass check`);
+  set("tPctClass",Math.round(T.pct_classified)+"%");
+  set("tPctClassD",`${num(T.unclassified)} unclassified`);
+  set("tOpenApp",num(T.open_app_posts));
+
+  set("pEmail",num(T.email_cta_companies));
+  set("pOpen",num(T.open_app_companies));
+  set("pReach",num(T.reachable_extra));
+  set("pCareers",num(T.careers_located));
+  set("pAts",num(T.supported_ats));
+  set("pUnsup",num(T.named_unsupported_ats));
+  set("pUnsupList",T.top_unsupported_ats.join(", "));
+  set("pCustom",num(T.custom_pages));
+
+  // range buttons carry counts/years that change with the data
+  set("btnAll",`All ${S.months.length} months`);
+  set("btnYtd",`YTD ${(S.months.filter(m=>m.startsWith(String(new Date().getFullYear())))[0]||"").slice(0,4)||""}`.trim());
+}
+
+function buildLegend(){
+  const lg = document.getElementById("fundLegend"); lg.innerHTML="";
+  SECTORS.forEach((s,i)=>{ const w=document.createElement("span");
+    w.innerHTML = `<i class="sw" style="background:var(${SC[i]})"></i>${s}`; lg.appendChild(w); });
+}
+
+/* ── monthly stacked bars ── */
+function drawFunding(range){
+  const svg=document.getElementById("fundChart"); svg.textContent="";
+  const months=RANGES[range], W=chartW(svg),H=300, L=54,R=14,T=16,B=42;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const iw=W-L-R, ih=H-T-B;
+  const tot=months.map(m=>SECTORS.reduce((a,s)=>a+(MONTHLY[m][s]||0),0));
+  const max=Math.max(...tot)*1.08;
+  const g=el("g"); svg.appendChild(g);
+  const gg=el("g",{class:"grid"});
+  for(let i=0;i<=4;i++){const y=T+ih-(ih*i/4);
+    gg.appendChild(el("line",{x1:L,x2:W-R,y1:y,y2:y}));
+    const tx=el("text",{x:L-8,y:y+3,"text-anchor":"end",class:"vlabel"});
+    tx.textContent=money(max*i/4); gg.appendChild(tx);}
+  g.appendChild(gg);
+  const bw=Math.min(46, iw/months.length*0.66), step=iw/months.length;
+  months.forEach((m,mi)=>{
+    const x=L+step*mi+(step-bw)/2; let acc=0;
+    SECTORS.forEach((s,si)=>{
+      const v=MONTHLY[m][s]||0; if(!v) return;
+      const h=(v/max)*ih; const y=T+ih-((acc+v)/max)*ih; acc+=v;
+      const r=el("rect",{x,y,width:bw,height:Math.max(h-2,1),rx:2,fill:cv(SC[si])});
+      r.appendChild(el("title")).textContent=`${m} · ${s}: $${v}M`;
+      g.appendChild(r);
+    });
+    const t=el("text",{x:x+bw/2,y:H-22,"text-anchor":"middle",class:"vlabel"});
+    t.textContent=m.slice(2).replace("-","/"); g.appendChild(t);
+    const tt=el("text",{x:x+bw/2,y:T+ih-(acc/max)*ih-6,"text-anchor":"middle",class:"vlabel"});
+    tt.textContent=Math.round(acc); g.appendChild(tt);
+  });
+  const ax=el("text",{x:L,y:H-6,class:"vlabel"}); ax.textContent="Disclosed deal value, $M per month"; g.appendChild(ax);
+}
+
+/* ── sector share: two donuts, same categories, different measures ──
+   Deliberately a pair. Dollars and company counts rank the sectors
+   differently, and showing them side by side is the whole point. The total
+   sits in each hole so every percentage has a visibly named denominator --
+   one is a share of dollars, the other a share of companies. */
+function donut(svgId, legId, items, centreTop, centreBot){
+  const svg=document.getElementById(svgId); svg.textContent="";
+  const legend=document.getElementById(legId); legend.innerHTML="";
+  const S=280, cx=S/2, cy=S/2, rO=S/2-6, rI=rO*0.6;
+  svg.setAttribute("viewBox",`0 0 ${S} ${S}`);
+  const total=items.reduce((a,b)=>a+b.value,0);
+  if(!total) return;
+  let ang=-Math.PI/2;
+  items.forEach(it=>{
+    const frac=it.value/total, sweep=frac*Math.PI*2, a0=ang, a1=ang+sweep;
+    ang=a1;
+    const big = sweep>Math.PI ? 1 : 0;
+    const P=(r,a)=>[cx+r*Math.cos(a), cy+r*Math.sin(a)];
+    const [x0,y0]=P(rO,a0), [x1,y1]=P(rO,a1), [x2,y2]=P(rI,a1), [x3,y3]=P(rI,a0);
+    // A full-circle slice can't be drawn as one arc (start == end), so nudge it.
+    const d = frac>0.999
+      ? `M ${cx-rO},${cy} A ${rO},${rO} 0 1,1 ${cx+rO},${cy} A ${rO},${rO} 0 1,1 ${cx-rO},${cy} Z`
+      : `M ${x0},${y0} A ${rO},${rO} 0 ${big},1 ${x1},${y1} L ${x2},${y2} `
+       +`A ${rI},${rI} 0 ${big},0 ${x3},${y3} Z`;
+    const path=el("path",{d, fill:it.color, stroke:cv("--surface-1"), "stroke-width":1.5});
+    path.appendChild(el("title")).textContent=`${it.label}: ${it.display} (${(frac*100).toFixed(1)}%)`;
+    svg.appendChild(path);
+  });
+  const t1=el("text",{x:cx,y:cy-2,"text-anchor":"middle",class:"rowlabel"});
+  t1.setAttribute("style","font-size:19px;font-weight:650");
+  t1.textContent=centreTop; svg.appendChild(t1);
+  const t2=el("text",{x:cx,y:cy+15,"text-anchor":"middle",class:"vlabel"});
+  t2.textContent=centreBot; svg.appendChild(t2);
+
+  items.forEach(it=>{
+    const pc=(100*it.value/total).toFixed(1);
+    legend.insertAdjacentHTML("beforeend",
+      `<li><i class="sw" style="background:${it.color}"></i>`
+     +`<span>${it.label}</span><span class="pc">${pc}%</span>`
+     +`<span class="vv">${it.display}</span></li>`);
+  });
+}
+
+function drawSectors(range){
+  document.getElementById("sectorNote").textContent=RANGE_LABEL[range];
+  // Same slice ORDER and COLOUR in both donuts, so the eye can track one
+  // sector across the pair. Sorting each independently would break that.
+  const order=[...SECTORS].sort((a,b)=>
+    SECTOR_STATS[b][range].total-SECTOR_STATS[a][range].total);
+  const colour=s=>cv(SC[SECTORS.indexOf(s)]);
+  const money$=order.map(s=>({label:short(s), color:colour(s),
+    value:SECTOR_STATS[s][range].total, display:money(SECTOR_STATS[s][range].total)}));
+  const cos=order.map(s=>({label:short(s), color:colour(s),
+    value:SECTOR_STATS[s][range].companies,
+    display:SECTOR_STATS[s][range].companies.toLocaleString()}));
+  const tm=money$.reduce((a,b)=>a+b.value,0);
+  const tc=cos.reduce((a,b)=>a+b.value,0);
+  donut("pieMoney","legMoney",money$, money(tm), "disclosed");
+  donut("pieCos","legCos",cos, tc.toLocaleString(), "companies");
+}
+
+/* ── jobs: MBA vs not, stacked ── */
+function drawJobs(){
+  const svg=document.getElementById("jobChart"); svg.textContent="";
+  const W=chartW(svg),L=132,R=118,T=8,rowH=34;
+  const rows=[...SECTORS].sort((a,b)=>(JOBS[b].mba+JOBS[b].non)-(JOBS[a].mba+JOBS[a].non));
+  const max=Math.max(...rows.map(s=>JOBS[s].mba+JOBS[s].non));
+  svg.setAttribute("viewBox",`0 0 ${W} ${T+rows.length*rowH+10}`);
+  rows.forEach((s,i)=>{
+    const y=T+i*rowH, d=JOBS[s], tot=d.mba+d.non, iw=W-L-R;
+    const lab=el("text",{x:L-10,y:y+20,"text-anchor":"end",class:"rowlabel"}); lab.textContent=s; svg.appendChild(lab);
+    const wm=(d.mba/max)*iw, wn=(d.non/max)*iw;
+    const b1=el("rect",{x:L,y:y+6,width:Math.max(wm,2),height:21,rx:4,fill:cv("--accent")});
+    b1.appendChild(el("title")).textContent=`${s} · MBA-relevant: ${d.mba}`; svg.appendChild(b1);
+    const b2=el("rect",{x:L+wm+2,y:y+6,width:Math.max(wn,2),height:21,rx:4,fill:cv("--neutral")});
+    b2.appendChild(el("title")).textContent=`${s} · not MBA-relevant: ${d.non}`; svg.appendChild(b2);
+    if(wm>34){const t=el("text",{x:L+8,y:y+21,class:"vlabel",fill:cv("--on-accent")});t.textContent=d.mba;svg.appendChild(t);}
+    const val=el("text",{x:L+wm+wn+11,y:y+21,class:"vlabel"});
+    val.textContent=`${tot} · ${Math.round(100*d.mba/tot)}% MBA`; svg.appendChild(val);
+  });
+}
+
+function buildTables(range){
+  const ft=document.getElementById("fundTable"); ft.innerHTML="";
+  document.getElementById("fundTableNote").textContent=
+    RANGE_LABEL[range]+" · median is the typical ticket; the mean is pulled "+
+    "upward by a few very large rounds, so prefer the median.";
+  const totalCos = SECTORS.reduce((a,x)=>a+SECTOR_STATS[x][range].companies,0);
+  // Ranked by companies raising, not dollars: for a jobs board, hiring
+  // tracks how many companies raised more than how much they raised.
+  [...SECTORS].sort((a,b)=>SECTOR_STATS[b][range].companies-SECTOR_STATS[a][range].companies)
+  .forEach(s=>{
+    const d=SECTOR_STATS[s][range];
+    const disc = d.companies ? Math.round(100*d.disclosed/d.companies) : 0;
+    // Two separate share columns on purpose: a share of dollars and a
+    // share of companies have different denominators and rank differently.
+    const cshare = totalCos ? (100*d.companies/totalCos).toFixed(1) : "0.0";
+    ft.insertAdjacentHTML("beforeend",
+     `<tr><td>${s}</td><td>${d.total.toLocaleString()}</td><td>${d.share}%</td><td>${d.companies}</td><td>${cshare}%</td><td>${d.median.toLocaleString()}</td><td>${d.mean.toLocaleString()}</td><td>${disc}%</td></tr>`);
+  });
+  const jt=document.getElementById("jobTable"); jt.innerHTML="";
+  [...SECTORS].sort((a,b)=>(JOBS[b].mba+JOBS[b].non)-(JOBS[a].mba+JOBS[a].non)).forEach(s=>{
+    const d=JOBS[s],t=d.mba+d.non; if(!t) return;
+    jt.insertAdjacentHTML("beforeend",
+     `<tr><td>${s}</td><td>${d.mba}</td><td>${d.non}</td><td>${t}</td><td>${Math.round(100*d.mba/t)}%</td></tr>`);
+  });
+}
+
+function buildFunnel(){
+  const fmax=Math.max(...FUNNEL.map(f=>f[1]));
+  document.getElementById("funnel").innerHTML=FUNNEL.map(([l,v],i)=>
+   `<div class="fr"><span>${l}</span><span class="fbar" style="width:${Math.max(v/fmax*100,1)}%;background:var(--fn${i+1})"></span><span class="n">${v.toLocaleString()}</span></div>`).join("");
+}
+
+/* ── controls ── */
+document.querySelectorAll(".ctl button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".ctl button").forEach(x=>x.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true");
+  drawFunding(b.dataset.range); drawSectors(b.dataset.range);
+}));
+function renderAll(){ if(!SECTORS.length) return; const r=document.querySelector('.ctl button[aria-pressed="true"]').dataset.range;
+  drawFunding(r); drawSectors(r); drawJobs(); buildTables(r);}
+
+/* ── data load ──────────────────────────────────────────────────────
+   stats.json is regenerated by build_stats.py on every pipeline run.
+   It is fetched rather than inlined so the numbers can refresh without
+   editing this file — and Notion is queried server-side, so no API token
+   is ever shipped to the browser. */
+function fail(msg){
+  const b=document.createElement("p");
+  b.className="asof";
+  b.style.cssText="color:#b3261e;border:1px solid currentColor;border-radius:8px;padding:10px 12px";
+  b.textContent="Could not load stats.json — charts below are unavailable. "+msg;
+  document.querySelector(".asof").after(b);
+}
+
+fetch("stats.json",{cache:"no-store"})
+  .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+  .then(S=>{
+    SECTORS=S.sectors; MONTHLY=S.monthly; SECTOR_TOTALS=S.sector_totals;
+    SECTOR_STATS=S.sector_stats;
+    JOBS=S.jobs; RANGES=S.ranges; RANGE_LABEL=S.range_labels; FUNNEL=S.funnel;
+
+    const gen=new Date(S.generated_at).toLocaleDateString("en-GB",
+      {day:"numeric",month:"short",year:"numeric"});
+    const thru=S.funding_through
+      ? new Date(S.funding_through+"T00:00:00").toLocaleDateString("en-GB",
+          {day:"numeric",month:"short",year:"numeric"})
+      : "unknown";
+    document.getElementById("asof").textContent =
+      `Live from Notion \u00b7 last refreshed ${gen}. Funding data covers deals through ${thru}.`;
+
+  /* Every number below is read from stats.json, never written into the page.
+     This copy is advice students act on, so it has to move with the board
+     rather than rot in the markup the way the original tiles did. */
+  const P = S.pitch || {};
+  const el_ = id => document.getElementById(id);
+
+  /* Job-board guide. The narrowing is the whole point of the explanation, so
+     both ends of it come from the same stats.json the charts use -- a student
+     told "538 of 3,437" must see that 538 in the table below. */
+  {
+    const T2 = S.tiles || {}, act = T2.active_listings, mba = T2.mba_roles;
+    if(act && mba){
+      const cut = act - mba;
+      el_("boardLede").innerHTML =
+        `Every open role we can find at a recently funded climate startup, narrowed to the `
+       +`ones an MBA can actually apply for. The table below is <b>already filtered</b>: you `
+       +`are seeing <b>${mba.toLocaleString()}</b> roles out of `
+       +`<b>${act.toLocaleString()}</b> we currently track.`;
+      el_("boardFilters").innerHTML = [
+        [`<b>Is Active</b>`,
+         `the role was still on the company&rsquo;s own careers page the last time we checked. `
+        +`Closed and dead-link postings drop off automatically.`],
+        [`<b>MBA Relevant</b>`,
+         `by far the biggest cut &mdash; it removes <b>${cut.toLocaleString()}</b> roles. `
+        +`Process engineers, lab scientists, technicians and field crew are real jobs, they `
+        +`just need degrees and licences an MBA programme doesn&rsquo;t give you.`],
+        [`<b>Application Method: Direct Apply</b>`,
+         `the posting has a real application link. Roles you can only reach by emailing someone `
+        +`are handled on the <b>Pitch yourself</b> tab instead, where the advice is different.`],
+        [`<b>Sorted by Date First Seen</b>`,
+         `newest first, so the roles at the top are the ones we found most recently.`],
+      ].map(([t,d]) => `<li>${t} &mdash; ${d}</li>`).join("");
+    }
+    if(T2.n_mba_functions)
+      ["nFunctions","nFunctions2"].forEach(id=>{
+        const e=el_(id); if(e) e.textContent=T2.n_mba_functions; });
+  }
+
+  if(P.pool_count){
+    el_("pitchLede").innerHTML =
+      `<b>${P.pool_count.toLocaleString()} climate companies</b> raised money in the last `
+     +`${P.window_months} months and have <b>no job posted</b>. They are hiring-shaped but not `
+     +`hiring-visible, so nobody is competing with you for them. This page is how to approach one.`;
+    el_("pitchStats").innerHTML = [
+      [P.pool_count.toLocaleString(), "companies funded but not posting"],
+      [Math.round(P.posting_median_weeks) + " wks", "median lag from raise to first posted role"],
+      [P.posting_within_26w_pct + "%", "post within 6 months of raising &mdash; the rest take longer"],
+      [P.pool_median_headcount, "median headcount &mdash; you would be an early hire"],
+    ].map(([n_,c]) => `<div><div class="n">${n_}</div><div class="c">${c}</div></div>`).join("");
+    el_("pitchWhy").innerHTML =
+      `Hiring lags funding badly. Companies that eventually post a role do so a median `
+     +`<b>${Math.round(P.posting_median_weeks)} weeks</b> after their raise, and only `
+     +`<b>${P.posting_within_26w_pct}%</b> post within six months. The companies on this list sit `
+     +`a median <b>${Math.round(P.pool_median_weeks)} weeks</b> past their raise &mdash; `
+     +`<b>earlier</b> in that cycle than the typical company with an ad up. They have the money `
+     +`and the plan; they have not written the job description yet. That gap is the opportunity, `
+     +`and it closes the moment the ad goes live.`;
+    el_("pitchStage").innerHTML =
+      `Median headcount here is <b>${P.pool_median_headcount}</b> &mdash; `
+     +`${P.pool_under_20_pct}% are under 20 people and ${P.pool_under_50_pct}% under 50. At that `
+     +`size there is no org chart to read, so read the <b>gaps</b> instead. Headcount tells you `
+     +`which gap is open:`;
+  }
+
+    buildTiles(S); buildLegend(); buildFunnel(); renderAll();
+  })
+  .catch(e=>fail(e.message));
+
+/* Redraw when the charts' container changes WIDTH. A ResizeObserver catches
+   cases a window "resize" event misses (zoom, devtools, layout shifts). The
+   width check matters: redrawing changes each SVG's height, which would
+   re-trigger the observer and loop forever if we reacted to every change. */
+let _lastW = 0, _rt;
+new ResizeObserver(es=>{
+  const w = Math.round(es[0].contentRect.width);
+  if (w === _lastW) return;
+  _lastW = w;
+  clearTimeout(_rt); _rt = setTimeout(renderAll, 120);
+}).observe(document.querySelector(".chart"));
+/* ── Tabs ───────────────────────────────────────────────────────────
+   Three things here are load-bearing:
+
+   1. REDRAW ON SHOW. The charts size themselves from their container's
+      rendered width, and inside a hidden panel that width is 0 — they would
+      draw at the 640px clamp and stay wrong. Every activation re-runs
+      renderAll() once the panel is visible.
+   2. LAZY IFRAMES. Each embed keeps its URL in data-src until its tab is
+      first opened, so a visitor who never opens "Pitch yourself" never pays
+      for a second Notion load.
+   3. HASH SYNC. The active tab is mirrored to location.hash so a specific
+      view can be linked — #metrics goes straight to the funnel. */
+const TABS = [...document.querySelectorAll('[role="tab"]')];
+const PANELS = Object.fromEntries(TABS.map(t =>
+  [t.dataset.tab, document.getElementById(t.getAttribute("aria-controls"))]));
+
+function showTab(name, {focus = false, push = true} = {}){
+  if(!PANELS[name]) name = "board";
+  TABS.forEach(t => {
+    const on = t.dataset.tab === name;
+    t.setAttribute("aria-selected", on ? "true" : "false");
+    t.tabIndex = on ? 0 : -1;
+    PANELS[t.dataset.tab].hidden = !on;
+    if(on && focus) t.focus();
+  });
+
+  const panel = PANELS[name];
+  panel.querySelectorAll("iframe[data-src]").forEach(f => {
+    f.src = f.dataset.src; f.removeAttribute("data-src");
+  });
+  // after the panel is visible, so the charts measure a real width
+  if(name === "metrics") requestAnimationFrame(() => renderAll());
+  if(push && location.hash.slice(1) !== name) history.replaceState(null, "", "#" + name);
+}
+
+TABS.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+document.querySelector('[role="tablist"]').addEventListener("keydown", e => {
+  const i = TABS.findIndex(t => t.getAttribute("aria-selected") === "true");
+  let j = null;
+  if(e.key === "ArrowRight") j = (i + 1) % TABS.length;
+  if(e.key === "ArrowLeft")  j = (i - 1 + TABS.length) % TABS.length;
+  if(e.key === "Home")       j = 0;
+  if(e.key === "End")        j = TABS.length - 1;
+  if(j !== null){ e.preventDefault(); showTab(TABS[j].dataset.tab, {focus:true}); }
+});
+addEventListener("hashchange", () => showTab(location.hash.slice(1), {push:false}));
+showTab(location.hash.slice(1) || "board", {push:false});
+
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",renderAll);
+new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+</script>
 
 </body>
 </html>

@@ -5,25 +5,25 @@
   "fund_ytd": 21339.9,
   "companies_with_deals": 1285,
   "companies_tracked": 2123,
-  "active_listings": 5062,
-  "boards_with_active": 472,
-  "mba_roles": 897,
+  "active_listings": 5056,
+  "boards_with_active": 469,
+  "mba_roles": 851,
   "n_mba_functions": 26,
   "n_excluded_functions": 8,
   "n_tech_categories": 99,
   "n_sectors": 6,
   "categorized": 2112,
   "pct_categorized": 99.5,
-  "pct_high_conf": 88.6,
-  "high_conf": 4091,
-  "classified": 4615,
-  "unclassified": 447,
-  "pct_classified": 91.2,
-  "open_app_posts": 140,
+  "pct_high_conf": 88.7,
+  "high_conf": 3933,
+  "classified": 4435,
+  "unclassified": 621,
+  "pct_classified": 87.7,
+  "open_app_posts": 134,
   "email_cta_companies": 52,
   "open_app_companies": 21,
-  "careers_located": 766,
-  "supported_ats": 331,
+  "careers_located": 765,
+  "supported_ats": 330,
   "named_unsupported_ats": 33,
   "top_unsupported_ats": [
    "Dover",
@@ -35,15 +35,15 @@
  },
  "pitch": {
   "window_months": 12,
-  "pool_count": 1008,
-  "pool_median_weeks": 24.0,
-  "posting_median_weeks": 32.1,
+  "pool_count": 989,
+  "pool_median_weeks": 24.4,
+  "posting_median_weeks": 33.3,
   "posting_within_26w_pct": 41,
   "pool_median_headcount": 9.0,
   "pool_under_20_pct": 77,
   "pool_under_50_pct": 92
  },
- "generated_at": "2026-11-20T06:01:32+00:00",
+ "generated_at": "2026-11-28T07:39:02+00:00",
  "funding_through": "2026-11-10",
  "sectors": [
   "Electricity",
@@ -485,28 +485,28 @@
  },
  "jobs": {
   "Electricity": {
-   "mba": 398,
-   "non": 1818
+   "mba": 379,
+   "non": 1868
   },
   "Transportation": {
-   "mba": 120,
-   "non": 767
+   "mba": 104,
+   "non": 780
   },
   "Manufacturing": {
-   "mba": 141,
-   "non": 682
+   "mba": 139,
+   "non": 670
   },
   "Food/Ag & Nature": {
-   "mba": 103,
-   "non": 442
+   "mba": 99,
+   "non": 432
   },
   "Buildings": {
-   "mba": 83,
+   "mba": 79,
    "non": 384
   },
   "GHG Removal": {
-   "mba": 51,
-   "non": 69
+   "mba": 50,
+   "non": 68
   }
  },
  "funnel": [
@@ -520,24 +520,24 @@
   ],
   [
    "Careers page located",
-   766
+   765
   ],
   [
    "On a supported ATS",
-   331
+   330
   ],
   [
    "Active listings harvested",
-   5062
+   5056
   ],
   [
    "MBA-relevant roles",
-   897
+   851
   ]
  ],
  "_diagnostics": {
   "companies_scanned": 2123,
-  "jobs_scanned": 9597,
+  "jobs_scanned": 9784,
   "active_jobs_without_sector": 4
  }
 }
